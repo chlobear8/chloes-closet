@@ -3,6 +3,8 @@
 * 11:30: Draft MVP's on paper
 * 1:00: Research C# and React compatability and file structure set up
 * 6:00: Began Project Set Up
+#### Sunday 6/25
+* 12:45: Project to-do's
 
 
 # Chloe's Closet
