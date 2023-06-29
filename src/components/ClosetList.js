@@ -3,9 +3,12 @@ import Closet from "./Closet";
 
 function ClosetList() {
   return (
-    <Closet 
-      category= {[]}
-      type= {[]}/>
+    <React.Fragment>
+      <Closet 
+        articleOfClothing= "name"
+        category= {[]}
+        type= {[]}/>
+    </React.Fragment>
   );
 }
 
