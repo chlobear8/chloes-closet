@@ -1,13 +1,13 @@
 import React from 'react';
 import Header from './Header';
 import './App.css';
-import ClosetList from './ClosetList';
+import ClosetControl from './ClosetControl';
 
 function App() {
   return (
     <React.Fragment>
       <Header />
-      <ClosetList />
+      <ClosetControl />
     </React.Fragment>
   );
 }
