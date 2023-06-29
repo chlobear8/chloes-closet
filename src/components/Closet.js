@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function Closet(props) {
   return (
@@ -10,4 +11,9 @@ function Closet(props) {
   );
 }
 
-export default Ticket;
+Closet.propTypes = {
+  category: PropTypes.array,
+  type: PropTypes.array
+}
+
+export default Closet;
