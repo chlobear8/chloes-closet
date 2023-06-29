@@ -17,8 +17,8 @@ function ClosetControl () {
   }
 
   const handleAddingNewArticleToList = (newArticle) => {
-    const newMainClosetList = this.state.mainClosetList.concat(newArticle);
-    this.setState({mainClosetList: newMainClosetList});
+    const newMainClosetList = mainClosetList.concat(newArticle);
+    setMainClosetList( newMainClosetList);
     setFormVisibleOnPage(false) 
   }
 
@@ -29,6 +29,13 @@ function ClosetControl () {
 
   const handleEditClick = () => {
     this.setState({editing: true});
+  }
+
+  const handleEditingArticleInList = (articleToEdit) => {
+    const editedMainClosetList = mainClosetList
+      .filter(article => article.id !== this.state.selectedArticle.id)
+      .concat(articleToEdit);
+    setMainClosetList(editedMainClosetList);
   }
 
   let currentlyVisibleState = null;
