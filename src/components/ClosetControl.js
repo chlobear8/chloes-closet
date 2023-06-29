@@ -8,6 +8,12 @@ function ClosetControl () {
     setFormVisibleOnPage(true);
   }
 
+  const handleAddingNewArticleToList = (newArticle) => {
+    const newMainClosetList = state.mainClosetList.concat(newArticle);
+    MediaStreamAudioDestinationNode({mainClosetList: newMainClosetList,
+            formVisibleOnPage: false });
+  }
+
   let currentlyVisibleState = null;
   let addClothingButton = null;
 
