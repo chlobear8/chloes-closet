@@ -1,10 +1,14 @@
 import React from 'react';
 import Header from './Header';
 import './App.css';
+import ClosetList from './ClosetList';
 
 function App() {
   return (
-    <Header />
+    <React.Fragment>
+      <Header />
+      <ClosetList />
+    </React.Fragment>
   );
 }
 
