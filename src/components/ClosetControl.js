@@ -16,9 +16,9 @@ function ClosetControl () {
   }
 
   const handleAddingNewArticleToList = (newArticle) => {
-    const newMainClosetList = state.mainClosetList.concat(newArticle);
-    setState({mainClosetList: newMainClosetList,
-            formVisibleOnPage: false });
+    const newMainClosetList = this.state.mainClosetList.concat(newArticle);
+    this.setState({mainClosetList: newMainClosetList});
+    setFormVisibleOnPage(false) 
   }
 
   let currentlyVisibleState = null;
