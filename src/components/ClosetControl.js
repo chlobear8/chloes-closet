@@ -7,7 +7,12 @@ function ClosetControl () {
   const [formVisibleOnPage, setFormVisibleOnPage] = useState(false);
 
   const handleClick = () => {
-    setFormVisibleOnPage(true);
+    if (selectedArticle != null) {
+      setFormVisibleOnPage(false);
+      setSelectedArticle(null);
+    } else {
+      setFormVisibleOnPage(!formVisibleOnPage);
+    }
   }
 
   const handleAddingNewArticleToList = (newArticle) => {
