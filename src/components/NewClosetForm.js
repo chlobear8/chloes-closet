@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 function NewClosetForm(props) {
@@ -49,43 +49,37 @@ function NewClosetForm(props) {
             onChange={handleChange} />
           Checking Season?
         </label>
-        <label>
-          <input
-            type="radio"
-            name="season"
-            value="spring"
-            checked={state.season === "spring"}
-            onChange={handleChange} />{" "}
-            Spring
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="season"
-            value="summer"
-            checked={state.season === "summer"}
-            onChange={handleChange} />{" "}
-            Summer
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="season"
-            value="fall"
-            checked={state.season === "fall"}
-            onChange={handleChange} />{" "}
-            Fall
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="season"
-            value="winter"
-            checked={state.season === "winter"}
-            onChange={handleChange} />{" "}
-            Winter
-        </label>
-        <button type = 'sublit'>{props.buttonText}</button>
+        <div className = "radio-button">
+          Spring
+            <input
+              type="radio"
+              name="season"
+              value="spring"
+              checked={state.season === "spring"}
+              onChange={handleChange} />
+          Summer
+            <input
+              type="radio"
+              name="season"
+              value="summer"
+              checked={state.season === "summer"}
+              onChange={handleChange} />
+          Fall
+            <input
+              type="radio"
+              name="season"
+              value="fall"
+              checked={state.season === "fall"}
+              onChange={handleChange} />
+          Winter
+            <input
+              type="radio"
+              name="season"
+              value="winter"
+              checked={state.season === "winter"}
+              onChange={handleChange} />
+        </div>
+        <button type = 'submit'>{props.buttonText}</button>
       </form>
     </React.Fragment>
   );
