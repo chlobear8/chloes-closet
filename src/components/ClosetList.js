@@ -3,7 +3,9 @@ import Closet from "./Closet";
 
 function ClosetList() {
   return (
-    <Closet />
+    <Closet 
+      category= {[]}
+      type= {[]}/>
   );
 }
 
