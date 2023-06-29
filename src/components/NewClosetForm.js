@@ -91,6 +91,7 @@ function NewClosetForm(props) {
 
 NewClosetForm.propTypes = {
   formSubmissionHandler: PropTypes.func,
+  onNewArticleCreation: PropTypes.func,
   buttonText: PropTypes.string
 };
 

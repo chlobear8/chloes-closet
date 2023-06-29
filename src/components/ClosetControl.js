@@ -10,15 +10,15 @@ function ClosetControl () {
 
   const handleAddingNewArticleToList = (newArticle) => {
     const newMainClosetList = state.mainClosetList.concat(newArticle);
-    MediaStreamAudioDestinationNode({mainClosetList: newMainClosetList,
+    setState({mainClosetList: newMainClosetList,
             formVisibleOnPage: false });
   }
 
   let currentlyVisibleState = null;
-  let addClothingButton = null;
+  let buttonText = null;
 
   if (formVisibleOnPage) {
-    currentlyVisibleState = <NewClosetForm onNewClosetCreation = {handleAddingNewArticleToList} />;
+    currentlyVisibleState = <NewClosetForm onNewArticleCreation = {handleAddingNewArticleToList} />;
     buttonText = "Return to Closet";
   } else {
     currentlyVisibleState = <ClosetList onClothingSelection = {handleChangingSelection} closetList = {mainClosetList} />;
