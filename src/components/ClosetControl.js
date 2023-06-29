@@ -5,6 +5,7 @@ import ClosetList from "./ClosetList";
 function ClosetControl () {
 
   const [formVisibleOnPage, setFormVisibleOnPage] = useState(false);
+  const [mainClosetList, setMainClosetList] = useState([]);
 
   const handleClick = () => {
     if (selectedArticle != null) {
@@ -19,6 +20,15 @@ function ClosetControl () {
     const newMainClosetList = this.state.mainClosetList.concat(newArticle);
     this.setState({mainClosetList: newMainClosetList});
     setFormVisibleOnPage(false) 
+  }
+
+  const handleDeletingArticle = (id) => {
+    const newMainClosetList = mainClosetList.filter(article => article.id !== id);
+    setMainClosetList(newMainClosetList);
+  }
+
+  const handleEditClick = () => {
+    this.setState({editing: true});
   }
 
   let currentlyVisibleState = null;
