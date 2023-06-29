@@ -6,11 +6,14 @@ function ClosetControl () {
 
   const [formVisibleOnPage, setFormVisibleOnPage] = useState(false);
   const [mainClosetList, setMainClosetList] = useState([]);
+  const [selectedArticle, setSelectedArticle] = useState(null);
+  const [editing, setEditing] = useState(false);
 
   const handleClick = () => {
     if (selectedArticle != null) {
       setFormVisibleOnPage(false);
       setSelectedArticle(null);
+      setEditing(false);
     } else {
       setFormVisibleOnPage(!formVisibleOnPage);
     }
@@ -25,17 +28,20 @@ function ClosetControl () {
   const handleDeletingArticle = (id) => {
     const newMainClosetList = mainClosetList.filter(article => article.id !== id);
     setMainClosetList(newMainClosetList);
+    setSelectedArticle(null);
   }
 
   const handleEditClick = () => {
-    this.setState({editing: true});
+    setEditing(true);
   }
 
   const handleEditingArticleInList = (articleToEdit) => {
     const editedMainClosetList = mainClosetList
-      .filter(article => article.id !== this.state.selectedArticle.id)
+      .filter(article => article.id !== selectedArticle.id)
       .concat(articleToEdit);
     setMainClosetList(editedMainClosetList);
+    setEditing(false);
+    setSelectedArticle(null);
   }
 
   let currentlyVisibleState = null;
