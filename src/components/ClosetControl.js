@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import NewClosetForm from "./NewClosetForm";
 import ClosetList from "./ClosetList";
 
 function ClosetControl () {
+
+  const [formVisibleOnPage, setFormVisibleOnPage] = useState(false);
 
   const handleClick = () => {
     setFormVisibleOnPage(true);
