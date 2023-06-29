@@ -44,6 +44,11 @@ function ClosetControl () {
     setSelectedArticle(null);
   }
 
+  const handleChangingSelectedArticle = (id) => {
+    const selection = mainClosetList.filter(article => article.id === id)[0];
+    setSelectedArticle(selection);
+  }
+
   let currentlyVisibleState = null;
   let buttonText = null;
 
