@@ -7,7 +7,7 @@ function ClosetList() {
       <Closet 
         articleOfClothing= "name"
         category= {[]}
-        type= {[]}/>
+        occasion= {[]}/>
     </React.Fragment>
   );
 }

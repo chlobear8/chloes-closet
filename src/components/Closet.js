@@ -6,7 +6,7 @@ function Closet(props) {
     <React.Fragment>
       <h1>{props.articleOfClothing}</h1>
       <h3>{props.category}</h3>
-      <h3>{props.type}</h3>
+      <h3>{props.occasion}</h3>
       <hr/>
     </React.Fragment>
   );
