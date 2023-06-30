@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 function NewClosetForm(props) {
-  function formSubmissionHandler(e) {
-    e.preventDefault();
-
     const handleChange = (e) => {
       const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
       setState((state) => ({
@@ -87,12 +84,11 @@ function NewClosetForm(props) {
       </React.Fragment>
     );
   }
-}
 
-NewClosetForm.propTypes = {
+
+ReusableForm.propTypes = {
   formSubmissionHandler: PropTypes.func,
-  onNewArticleCreation: PropTypes.func,
   buttonText: PropTypes.string
 };
 
-export default NewClosetForm;
+export default ReusableForm;
