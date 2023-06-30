@@ -52,7 +52,19 @@ function ClosetControl () {
   let currentlyVisibleState = null;
   let buttonText = null;
 
-  if (formVisibleOnPage) {
+  if (editing) {
+    currentlyVisibleState =
+    <EditArticleForm  
+      article = {selectedArticle}
+      onEditArticle= {handleEditingArticleInList} />
+      buttonText= "Return to Closet";
+  } else if (selectedArticle != null) {
+    currentlyVisibleState = <ArticleDetail
+      article={selectedArticle}
+      onClickingDelete={handleDeletingArticle}
+      onClickingEdit={handleEditClick} />
+      buttonText= "Return to Closet";
+  }else if (formVisibleOnPage) {
     currentlyVisibleState = <NewClosetForm onNewArticleCreation = {handleAddingNewArticleToList} />;
     buttonText = "Return to Closet";
   } else {
