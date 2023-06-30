@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import NewClosetForm from "./ReusableForm";
+import NewArticleForm from "./NewArticleForm";
+import EditArticleForm from "./EditArticleForm";
 import ClosetList from "./ClosetList";
+import ArticleDetail from "./ArticleDetail";
 
 function ClosetControl () {
 
