@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-function NewClosetForm(props) {
+function ReusableForm(props) {
     const handleChange = (e) => {
       const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
       setState((state) => ({
@@ -28,7 +28,7 @@ function NewClosetForm(props) {
               value={state.category}
               onChange={handleChange} >
                 <option value={""} disabled>Pick your category</option>
-                {clothingCategories}
+                {/* {clothingCategories} */}
               </select>
           </label>
           <label>
@@ -38,7 +38,7 @@ function NewClosetForm(props) {
               value={state.occasion}
               onChange={handleChange} >
                 <option value={""} disabled>Pick your occasion</option>
-                {clothingOccasions}
+                {/* {clothingOccasions} */}
               </select>
           </label>
           <label>
