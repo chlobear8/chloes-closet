@@ -5,6 +5,8 @@
 * 6:00: Began Project Set Up
 #### Sunday 6/25
 * 12:45: Project to-do's
+#### Friday 6/30
+* 10: Watch tutorials on setting up Supabase in React applications
 
 
 # Chloe's Closet

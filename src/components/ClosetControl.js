@@ -70,7 +70,7 @@ function ClosetControl () {
     currentlyVisibleState = <NewArticleForm onNewArticleCreation = {handleAddingNewArticleToList} />;
     buttonText = "Return to Closet";
   } else {
-    currentlyVisibleState = <ClosetList onArticleSelection = {handleChangingSelectedArticle} closetList = {mainClosetList} />;
+    currentlyVisibleState = <ClosetList onArticleSelection = {handleChangingSelectedArticle} articleList = {mainClosetList} />;
     buttonText = "Add Clothing";
   }
 
