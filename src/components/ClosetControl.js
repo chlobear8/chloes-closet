@@ -65,7 +65,7 @@ function ClosetControl () {
       onClickingEdit={handleEditClick} />
       buttonText= "Return to Closet";
   }else if (formVisibleOnPage) {
-    currentlyVisibleState = <NewClosetForm onNewArticleCreation = {handleAddingNewArticleToList} />;
+    currentlyVisibleState = <NewArticleForm onNewArticleCreation = {handleAddingNewArticleToList} />;
     buttonText = "Return to Closet";
   } else {
     currentlyVisibleState = <ClosetList onClothingSelection = {handleChangingSelection} closetList = {mainClosetList} />;
