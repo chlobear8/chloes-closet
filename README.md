@@ -7,6 +7,8 @@
 * 12:45: Project to-do's
 #### Friday 6/30
 * 10: Watch tutorials on setting up Supabase in React applications
+#### Thursday 7/6
+* 9: React form tutorials for form inputs/selects
 
 
 # Chloe's Closet
