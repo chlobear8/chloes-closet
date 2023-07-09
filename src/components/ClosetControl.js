@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import NewArticleForm from "./NewArticleForm";
 import EditArticleForm from "./EditArticleForm";
-import ClosetList from "./ClosetList";
+import ArticleList from "./ArticleList";
 import ArticleDetail from "./ArticleDetail";
 
 function ClosetControl () {
@@ -70,7 +70,7 @@ function ClosetControl () {
     currentlyVisibleState = <NewArticleForm onNewArticleCreation = {handleAddingNewArticleToList} />;
     buttonText = "Return to Closet";
   } else {
-    currentlyVisibleState = <ClosetList onArticleSelection = {handleChangingSelectedArticle} articleList = {mainClosetList} />;
+    currentlyVisibleState = <ArticleList onArticleSelection = {handleChangingSelectedArticle} articles = {mainClosetList} />;
     buttonText = "Add Clothing";
   }
 

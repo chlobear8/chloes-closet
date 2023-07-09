@@ -7,9 +7,9 @@ function Closet(props) {
       <div onClick = {() => props.whenArticleClicked(props.id)}>
         <h1>{props.articleName}</h1>
         {props.image && <img src={URL.createObjectURL(props.image)} alt={props.articleName} />}
-        <h3>Category:{props.category}</h3>
+        {/* <h3>Category:{props.category}</h3>
         <h3>Occasion:{props.occasion}</h3>
-        <h3>Seasons:{props.season.join(", ")}</h3>
+        <h3>Seasons:{props.season.join(", ")}</h3> */}
         <hr/>
       </div>
     </React.Fragment>
@@ -19,9 +19,9 @@ function Closet(props) {
 Closet.propTypes = {
   articleName: PropTypes.string,
   image: PropTypes.instanceOf(File),
-  category: PropTypes.string,
-  occasion: PropTypes.string,
-  season: PropTypes.array,
+  // category: PropTypes.string,
+  // occasion: PropTypes.string,
+  // season: PropTypes.array,
   id: PropTypes.string,
   whenArticleClicked: PropTypes.func
 }

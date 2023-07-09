@@ -2,11 +2,11 @@ import React from "react";
 import Closet from "./Closet";
 import PropTypes from "prop-types";
 
-function ClosetList(props) {
+function ArticleList(props) {
   return (
     <React.Fragment>
       <hr />
-      {props.articleList.map((article) =>
+      {props.articles.map((article) =>
       <Closet 
       whenArticleClicked={props.onArticleSelection}
       articleName= {article.articleName}
@@ -21,9 +21,9 @@ function ClosetList(props) {
   );
 }
 
-ClosetList.propTypes = {
-  closetList: PropTypes.array,
+ArticleList.propTypes = {
+  articles: PropTypes.array,
   onArticleSelection: PropTypes.func
 }
 
-export default ClosetList;
+export default ArticleList;
