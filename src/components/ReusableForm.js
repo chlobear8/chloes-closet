@@ -21,8 +21,7 @@ function ReusableForm(props) {
           <input
             type='text'
             name='name'
-            value={articleName}
-            onChange={(e) => setArticleName(e.target.)}
+            value={state.articleName}
             placeholder='Clothing Name' />
           <label>
             Category:

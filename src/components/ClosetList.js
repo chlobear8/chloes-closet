@@ -9,7 +9,7 @@ function ClosetList(props) {
       {props.articleList.map((article) =>
       <Closet 
       whenArticleClicked={props.onArticleSelection}
-      articleOfClothing= {article.articleOfClothing}
+      articleName= {article.articleName}
       category= {article.category}
       occasion= {article.occassion}
       id= {article.id}
