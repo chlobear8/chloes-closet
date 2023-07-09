@@ -9,7 +9,9 @@ function ReusableForm(props) {
     occasion: "",
     season: [],
   });
-  const clothingCategories = ["Tops", "Bottoms", "Shoes", "Dresses", "Bags", "Accessories", "Outerwear"]
+  const clothingCategories = ["Tops", "Bottoms", "Shoes", "Dresses", "Bags", "Accessories", "Outerwear"];
+
+  const clothingOccasions = ["Casual", "Formal", "Work"];
 
   const handleChange = (e) => {
     const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
@@ -65,7 +67,11 @@ function ReusableForm(props) {
             value={state.occasion}
             onChange={handleChange} >
               <option value={""} disabled>Pick your occasion</option>
-              {/* {clothingOccasions} */}
+              {clothingOccasions.map((occasion, index) => (
+                <option key={index} value={occasion}>
+                  {occasion}
+                </option>
+              ))}
             </select>
         </label>
         <div className = "check-box">

@@ -11,7 +11,7 @@ function ClosetList(props) {
       whenArticleClicked={props.onArticleSelection}
       articleName= {article.articleName}
       category= {article.category}
-      occasion= {article.occassion}
+      occasion= {article.occasion}
       season= {article.season}
       id= {article.id}
       key= {article.id} />
