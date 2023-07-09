@@ -5,8 +5,8 @@ function ReusableForm(props) {
 
   const [state, setState] = useState({
     articleName: "",
-    category: (null),
-    occasion: (null),
+    category: "",
+    occasion: "",
     season: [],
   });
 
@@ -29,14 +29,20 @@ function ReusableForm(props) {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.formSubmissionHandler(state);
+  };
+
   return (
     <React.Fragment>
-      <form onSubmit = {props.formSubmissionHandler}>
+      <form onSubmit = {handleSubmit}>
         <input
           type='text'
-          name='name'
-          value={state.articleName}
-          placeholder='Clothing Name' />
+          name='articleName'
+          defaultValue={state.articleName}
+          placeholder='Clothing Name'
+          onChange={handleChange} />
         <label>
           Category:
           <select

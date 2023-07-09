@@ -16,8 +16,8 @@ function Closet(props) {
 
 Closet.propTypes = {
   articleName: PropTypes.string,
-  category: PropTypes.array,
-  occasion: PropTypes.array,
+  category: PropTypes.string,
+  occasion: PropTypes.string,
   season: PropTypes.array,
   id: PropTypes.string,
   whenArticleClicked: PropTypes.func
