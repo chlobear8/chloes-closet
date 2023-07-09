@@ -9,17 +9,9 @@
 
 ** Filters
 - Seasons
-- Day
-- Work
-- Evening
-- Favorites
-
-OR
-
-- Seasons
 - Casual
 - Formal
-- Interview/Presentation
+- Work
 - Favorites
 
 **Calendar
