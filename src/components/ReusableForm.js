@@ -2,19 +2,32 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 function ReusableForm(props) {
+
+  const [state, setState] = useState({
+    season: [],
+  });
+
+  // const [season, setSeason] = useState([]);
+
     const handleChange = (e) => {
       const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
-      setState((state) => ({
-        ...state,
+      setState((prevState) => ({
+        ...prevState,
         [e.target.name]: value
       }));
     };
 
-    const [state, setState] = useState({
-      season: "",
-    })
-    const [category, setCategory] = useState('');
-    const [articleName, setArticleName] = useState('');
+    const handleCheckedBox = (e) => {
+      const { value, checked } = e.target;
+      setState((prevState) => {
+        if (checked) {
+          return { ...prevState, season: [...prevState.season, value] };
+        } else {
+          return { ...prevState, season: prevState.season.filter((item) => item !== value) };
+        }
+      });
+    };
+
     return (
       <React.Fragment>
         <form onSubmit = {props.formSubmissionHandler}>
@@ -43,43 +56,43 @@ function ReusableForm(props) {
                 {/* {clothingOccasions} */}
               </select>
           </label>
-          <label>
+          {/* <label>
             <input
               type="checkbox"
               name="isChecked"
               checked={state.isChecked}
               onChange={handleChange} />
             Checking Season?
-          </label>
-          <div className = "radio-button">
+          </label> */}
+          <div className = "check-box">
             Spring
               <input
-                type="radio"
+                type="checkbox"
                 name="season"
                 value="spring"
-                checked={state.season === "spring"}
-                onChange={handleChange} />
+                checked={state.season.includes("spring")}
+                onChange={handleCheckedBox} />
             Summer
               <input
-                type="radio"
+                type="checkbox"
                 name="season"
                 value="summer"
-                checked={state.season === "summer"}
-                onChange={handleChange} />
+                checked={state.season.includes("summer")}
+                onChange={handleCheckedBox} />
             Fall
               <input
-                type="radio"
+                type="checkbox"
                 name="season"
                 value="fall"
-                checked={state.season === "fall"}
-                onChange={handleChange} />
+                checked={state.season.includes("fall")}
+                onChange={handleCheckedBox} />
             Winter
               <input
-                type="radio"
+                type="checkbox"
                 name="season"
                 value="winter"
-                checked={state.season === "winter"}
-                onChange={handleChange} />
+                checked={state.season.includes("winter")}
+                onChange={handleCheckedBox} />
           </div>
           <button type = 'submit'>{props.buttonText}</button>
         </form>
