@@ -10,6 +10,7 @@ function ClosetList(props) {
       <Closet 
       whenArticleClicked={props.onArticleSelection}
       articleName= {article.articleName}
+      image={article.image}
       category= {article.category}
       occasion= {article.occasion}
       season= {article.season}

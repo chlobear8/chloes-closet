@@ -5,9 +5,10 @@ function ReusableForm(props) {
 
   const [state, setState] = useState({
     articleName: "",
+    image: null,
     category: "",
     occasion: "",
-    season: [],
+    season: []
   });
   const clothingCategories = ["Tops", "Bottoms", "Shoes", "Dresses", "Bags", "Accessories", "Outerwear"];
 
@@ -32,6 +33,13 @@ function ReusableForm(props) {
     });
   };
 
+  const handleImageChange = (e) => {
+    setState((prevState) => ({
+      ...prevState,
+      image: e.target.files[0]
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     props.formSubmissionHandler(state);
@@ -46,6 +54,14 @@ function ReusableForm(props) {
           defaultValue={state.articleName}
           placeholder='Clothing Name'
           onChange={handleChange} />
+        <label>
+          Image:
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleImageChange} />
+        </label>
         <label>
           Category:
           <select
