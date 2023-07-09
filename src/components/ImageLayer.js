@@ -1,24 +1,24 @@
-import React from "react";
+// import React from "react";
 
-const imageLayering = ({ images, baseImage }) => {
-  return (
-    <div style = {{ position: 'relative' }}>
-      <img src = {baseImage} alt = "Avatar" />
+// const imageLayering = ({ images, baseImage }) => {
+//   return (
+//     <div style = {{ position: 'relative' }}>
+//       <img src = {baseImage} alt = "Avatar" />
 
-      {images.map((image, index) => (
-        <img
-          key={index}
-          src={image.src}
-          alt={`{$index}`}
-          style={{
-            position: 'absolute',
-            top: image.position.top,
-            left: image.position.left,
-          }}
-        />
-      ))}
-    </div>
-  );
-};
+//       {images.map((image, index) => (
+//         <img
+//           key={index}
+//           src={image.src}
+//           alt={`{$index}`}
+//           style={{
+//             position: 'absolute',
+//             top: image.position.top,
+//             left: image.position.left,
+//           }}
+//         />
+//       ))}
+//     </div>
+//   );
+// };
 
-export default imageLayering;
+// export default imageLayering;
