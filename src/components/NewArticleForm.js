@@ -6,9 +6,10 @@ function NewArticleForm(props) {
   function handleNewArticleFormSubmission(e) {
     e.preventDefault();
     props.onNewArticleCreation({
-      articleOfClothing: e.target.articleOfClothing.value,
+      articleName: e.target.articleName.value,
       category: e.target.category.value,
-      occassion: e.target.occassion.value
+      occasion: e.target.occassion.value,
+      season: e.target.season.value
     });
   }
   return(

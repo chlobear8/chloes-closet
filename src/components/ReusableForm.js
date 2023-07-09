@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 function ReusableForm(props) {
 
   const [state, setState] = useState({
+    articleName: "",
+    category: (null),
+    occasion: (null),
     season: [],
   });
 

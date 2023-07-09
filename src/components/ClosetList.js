@@ -12,6 +12,7 @@ function ClosetList(props) {
       articleName= {article.articleName}
       category= {article.category}
       occasion= {article.occassion}
+      season= {article.season}
       id= {article.id}
       key= {article.id} />
       )}

@@ -5,9 +5,9 @@ function Closet(props) {
   return (
     <React.Fragment>
       <div onClick = {() => props.whenArticleClicked(props.id)}>
-        <h1>{props.articleOfClothing}</h1>
+        <h1>{props.articleName}</h1>
         <h3>{props.category}</h3>
-        <h3>{props.occasion}</h3>
+        <h3>{props.occasion}-{props.season}</h3>
         <hr/>
       </div>
     </React.Fragment>
@@ -15,9 +15,10 @@ function Closet(props) {
 }
 
 Closet.propTypes = {
-  articleOfClothing: PropTypes.string,
+  articleName: PropTypes.string,
   category: PropTypes.array,
-  type: PropTypes.array,
+  occasion: PropTypes.array,
+  season: PropTypes.array,
   id: PropTypes.string,
   whenArticleClicked: PropTypes.func
 }
