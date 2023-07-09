@@ -79,29 +79,29 @@ function ReusableForm(props) {
             <input
               type="checkbox"
               name="season"
-              value="spring"
-              checked={state.season.includes("spring")}
+              value="Spring"
+              checked={state.season.includes("Spring")}
               onChange={handleCheckedBox} />
           Summer
             <input
               type="checkbox"
               name="season"
-              value="summer"
-              checked={state.season.includes("summer")}
+              value="Summer"
+              checked={state.season.includes("Summer")}
               onChange={handleCheckedBox} />
           Fall
             <input
               type="checkbox"
               name="season"
-              value="fall"
-              checked={state.season.includes("fall")}
+              value="Fall"
+              checked={state.season.includes("Fall")}
               onChange={handleCheckedBox} />
           Winter
             <input
               type="checkbox"
               name="season"
-              value="winter"
-              checked={state.season.includes("winter")}
+              value="Winter"
+              checked={state.season.includes("Winter")}
               onChange={handleCheckedBox} />
         </div>
         <button type = 'submit'>{props.buttonText}</button>

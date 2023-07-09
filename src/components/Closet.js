@@ -6,8 +6,9 @@ function Closet(props) {
     <React.Fragment>
       <div onClick = {() => props.whenArticleClicked(props.id)}>
         <h1>{props.articleName}</h1>
-        <h3>{props.category}</h3>
-        <h3>{props.occasion}-{props.season.join(", ")}</h3>
+        <h3>Category:{props.category}</h3>
+        <h3>Occasion:{props.occasion}</h3>
+        <h3>Seasons:{props.season.join(", ")}</h3>
         <hr/>
       </div>
     </React.Fragment>
