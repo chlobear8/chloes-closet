@@ -11,8 +11,8 @@ function ArticleDetail(props) {
       {article.image && <img src={URL.createObjectURL(article.image)} alt={article.articleName} />}
       <h3>{article.category} - {article.occasion}</h3>
       <h3>{article.season.join(", ")}</h3>
-      <button onClick = {() => onClickingEdit(article.id) }>Update Article</button>
-      <button onClick={() => onClickingDelete(article.id) }>Delete Article</button>
+      <button onClick = {() => onClickingEdit(article.id) }>Update Item</button>
+      <button onClick={() => onClickingDelete(article.id) }>Delete Item</button>
       <hr/>
     </React.Fragment>
   );
