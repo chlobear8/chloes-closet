@@ -3,6 +3,7 @@ import NewArticleForm from "./NewArticleForm";
 import EditArticleForm from "./EditArticleForm";
 import ArticleList from "./ArticleList";
 import ArticleDetail from "./ArticleDetail";
+import CalendarView from "./CalendarView";
 
 function ClosetControl () {
 
@@ -10,6 +11,7 @@ function ClosetControl () {
   const [mainClosetList, setMainClosetList] = useState([]);
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [editing, setEditing] = useState(false);
+  const [calendarView, setCalendarView] = useState(false);
 
   const handleClick = () => {
     if (selectedArticle != null) {
@@ -51,6 +53,16 @@ function ClosetControl () {
     setSelectedArticle(selection);
   }
 
+  const handleCalendarClick = () => {
+    setCalendarView(true);
+  }
+
+  const handleCalendarView = (calendarPage) => {
+    setEditing(false);
+    setCalendarView(false);
+    setSelectedArticle(null);
+  }
+
   let currentlyVisibleState = null;
   let buttonText = null;
 
@@ -66,11 +78,17 @@ function ClosetControl () {
       onClickingDelete={handleDeletingArticle}
       onClickingEdit={handleEditClick} />
       buttonText= "Return to Closet";
-  }else if (formVisibleOnPage) {
+  } else if (formVisibleOnPage) {
     currentlyVisibleState = <NewArticleForm onNewArticleCreation = {handleAddingNewArticleToList} />;
     buttonText = "Return to Closet";
+  } else if (calendarView) {
+    currentlyVisibleState = <CalendarView onCalendarView = {handleCalendarView} />;
+    buttonText = "Return to Closet";
   } else {
-    currentlyVisibleState = <ArticleList onArticleSelection = {handleChangingSelectedArticle} articles = {mainClosetList} />;
+    currentlyVisibleState = <ArticleList 
+    onArticleSelection = {handleChangingSelectedArticle} 
+    articles = {mainClosetList}
+    onCalendarClick={handleCalendarClick} />;
     buttonText = "Add Clothing";
   }
 
