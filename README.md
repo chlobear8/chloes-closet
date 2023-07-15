@@ -11,7 +11,7 @@
 * 9: React form tutorials for form inputs/selects
 #### Saturday 7/15
 * 12: Take pictures for DB, so I can test image layering.
-
+* 2:15: Download photos into a file for access.
 
 
 # Chloe's Closet
