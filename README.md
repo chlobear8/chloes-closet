@@ -9,6 +9,9 @@
 * 10: Watch tutorials on setting up Supabase in React applications
 #### Thursday 7/6
 * 9: React form tutorials for form inputs/selects
+#### Saturday 7/15
+* 12: Take pictures for DB, so I can test image layering.
+
 
 
 # Chloe's Closet
