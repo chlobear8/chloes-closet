@@ -4,6 +4,7 @@ import EditArticleForm from "./EditArticleForm";
 import ArticleDetail from "./ArticleDetail";
 import CalendarView from "./CalendarView";
 import db from './../firebase.js';
+import { collection, addDoc } from "firebase/firestore";
 
 function ClosetControl () {
 
@@ -23,10 +24,9 @@ function ClosetControl () {
     }
   }
 
-  const handleAddingNewArticleToList = (newArticle) => {
-    const newMainClosetList = mainClosetList.concat(newArticle);
-    setMainClosetList( newMainClosetList);
-    setFormVisibleOnPage(false) 
+  const handleAddingNewArticleToList = async (newArticle) => {
+    await addDoc(collection(db, "articles"), newArticle);
+    setFormVisibleOnPage(false);
   }
 
   const handleDeletingArticle = (id) => {
