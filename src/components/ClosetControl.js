@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NewArticleForm from "./NewArticleForm";
 import EditArticleForm from "./EditArticleForm";
 import ArticleDetail from "./ArticleDetail";
 import CalendarView from "./CalendarView";
 import db from './../firebase.js';
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, onSnapshot } from "firebase/firestore";
 
 function ClosetControl () {
 
@@ -23,6 +23,17 @@ function ClosetControl () {
       setFormVisibleOnPage(!formVisibleOnPage);
     }
   }
+
+  useEffect(() => {
+    const unSubscribe = onSnapshot(
+      collection(db, "articles"),
+      (collectionSnapshot) => {
+
+      },
+    );
+
+    return () => unSubscribe();
+  }, []);
 
   const handleAddingNewArticleToList = async (newArticle) => {
     await addDoc(collection(db, "articles"), newArticle);
