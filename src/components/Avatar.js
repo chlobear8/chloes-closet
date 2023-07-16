@@ -7,10 +7,11 @@ function Avatar(props) {
   const baseImage = '';
   const images = props.articles.map(article => article.image);
   const [isActive, timer, setIsActive] = LastWornTimer();
-  
+  props.newAvatar = {baseImage, images};
+
   return (
     <React.Fragment>
-      <ImageLayer baseImage={baseImage} images={images} />
+      <ImageLayer newAvatar = {props.newAvatar} />
       {isActive ? <h1>{timer}</h1> : <h1>{props.lastWorn}</h1>}
       <button onClick={() => setIsActive(!isActive)}>Set as worn?</button>
     </React.Fragment>
@@ -19,7 +20,8 @@ function Avatar(props) {
 
 Avatar.propTypes = {
   articles: PropTypes.array,
-  lastWorn: PropTypes.string
+  lastWorn: PropTypes.string,
+  newAvatar: PropTypes.object
 }
 
 export default Avatar;

@@ -1,5 +1,4 @@
 import React from "react";
-//import Closet from "./Closet";
 
 const imageLayering = ({ images, baseImage }) => {
   return (
