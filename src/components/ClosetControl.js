@@ -4,7 +4,7 @@ import EditArticleForm from "./EditArticleForm";
 import ArticleDetail from "./ArticleDetail";
 import CalendarView from "./CalendarView";
 import db from './../firebase.js';
-import { collection, addDoc, onSnapshot } from "firebase/firestore";
+import { collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc } from "firebase/firestore";
 
 function ClosetControl () {
 
@@ -13,16 +13,7 @@ function ClosetControl () {
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [editing, setEditing] = useState(false);
   const [calendarView, setCalendarView] = useState(false);
-
-  const handleClick = () => {
-    if (selectedArticle != null) {
-      setFormVisibleOnPage(false);
-      setSelectedArticle(null);
-      setEditing(false);
-    } else {
-      setFormVisibleOnPage(!formVisibleOnPage);
-    }
-  }
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const unSubscribe = onSnapshot(
@@ -43,12 +34,22 @@ function ClosetControl () {
         setMainClosetList(articles);
       },
       (error) => {
-        
+        setError(error.message);
       }
     );
 
     return () => unSubscribe();
   }, []);
+
+  const handleClick = () => {
+    if (selectedArticle != null) {
+      setFormVisibleOnPage(false);
+      setSelectedArticle(null);
+      setEditing(false);
+    } else {
+      setFormVisibleOnPage(!formVisibleOnPage);
+    }
+  }
 
   const handleAddingNewArticleToList = async (newArticle) => {
     await addDoc(collection(db, "articles"), newArticle);
@@ -94,7 +95,9 @@ function ClosetControl () {
   let currentlyVisibleState = null;
   let buttonText = null;
 
-  if (editing) {
+  if (error) {
+    currentlyVisibleState = <p>There was an error: {error}</p>
+  } else if (editing) {
     currentlyVisibleState =
     <EditArticleForm  
       article = {selectedArticle}
@@ -121,7 +124,7 @@ function ClosetControl () {
   return (
     <React.Fragment>
       {currentlyVisibleState}
-      <button onClick = {handleClick}>{buttonText}</button>
+      {error ? null : <button onClick = {handleClick}>{buttonText}</button>}
     </React.Fragment>
   );
 }
