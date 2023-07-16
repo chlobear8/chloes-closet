@@ -8,6 +8,7 @@ function ArticleDetail(props) {
     <React.Fragment>
       <h1>Article's Detail</h1>
       <h3>{article.articleName}</h3>
+      <h3>{article.lastWorn}</h3>
       {article.image && <img src={URL.createObjectURL(article.image)} alt={article.articleName} />}
       <h3>{article.category} - {article.occasion}</h3>
       <h3>{article.season.join(", ")}</h3>

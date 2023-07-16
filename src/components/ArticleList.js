@@ -14,6 +14,7 @@ function ArticleList(props) {
       category= {article.category}
       occasion= {article.occasion}
       season= {article.season}
+      lastWorn= {article.lastWorn}
       id= {article.id}
       key= {article.id} />
       )}
