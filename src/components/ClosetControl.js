@@ -63,6 +63,8 @@ function ClosetControl () {
     setSelectedArticle(null);
   }
 
+  
+
   let currentlyVisibleState = null;
   let buttonText = null;
 
