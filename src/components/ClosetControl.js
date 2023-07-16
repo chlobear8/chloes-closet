@@ -28,8 +28,23 @@ function ClosetControl () {
     const unSubscribe = onSnapshot(
       collection(db, "articles"),
       (collectionSnapshot) => {
-
+        const articles = [];
+        collectionSnapshot.forEach((doc) => {
+          articles.push({
+            articleName: doc.data().articleName,
+            image: doc.data().image,
+            category: doc.data().category,
+            occasion: doc.data().occasion,
+            season: doc.data().season,
+            lastWorn: doc.data().lastWorn,
+            id: doc.id
+          });
+        });
+        setMainClosetList(articles);
       },
+      (error) => {
+        
+      }
     );
 
     return () => unSubscribe();
