@@ -52,13 +52,12 @@ function ClosetControl () {
   }
 
   const handleAddingNewArticleToList = async (newArticle) => {
-    await addDoc(collection(db, "articles"), newArticle);
+    await addDoc(collection(db, "article"), newArticle);
     setFormVisibleOnPage(false);
   }
 
-  const handleDeletingArticle = (id) => {
-    const newMainClosetList = mainClosetList.filter(article => article.id !== id);
-    setMainClosetList(newMainClosetList);
+  const handleDeletingArticle = async (id) => {
+    await deleteDoc(doc(db, "article", id));
     setSelectedArticle(null);
   }
 
@@ -67,7 +66,7 @@ function ClosetControl () {
   }
 
   const handleEditingArticleInList = async (articleToEdit) => {
-    await updateDoc(doc(db, "articles", selectedArticle.id), articleToEdit);
+    await updateDoc(doc(db, "article", selectedArticle.id), articleToEdit);
     setEditing(false);
     setSelectedArticle(null);
   }
