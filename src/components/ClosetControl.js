@@ -66,11 +66,8 @@ function ClosetControl () {
     setEditing(true);
   }
 
-  const handleEditingArticleInList = (articleToEdit) => {
-    const editedMainClosetList = mainClosetList
-      .filter(article => article.id !== selectedArticle.id)
-      .concat(articleToEdit);
-    setMainClosetList(editedMainClosetList);
+  const handleEditingArticleInList = async (articleToEdit) => {
+    await updateDoc(doc(db, "articles", selectedArticle.id), articleToEdit);
     setEditing(false);
     setSelectedArticle(null);
   }
