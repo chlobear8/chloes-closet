@@ -14,7 +14,10 @@ function Avatar(props) {
     <React.Fragment>
       <ImageLayer newAvatar = {props.newAvatar} />
       {isActive ? <h1>{timer}</h1> : <h1>{props.lastWorn}</h1>}
-      <button onClick={() => setIsActive(!isActive)}>Set as worn?</button>
+      <button onClick={() => {
+        setIsActive(!isActive);
+        setNewAvatar({ baseImage, images });
+      }}>Set as worn?</button>
     </React.Fragment>
   );
 }

@@ -10,7 +10,7 @@ function LastWornTimer() {
     let lastWorn;
   
     if(isActive) {
-      interval = setInterval(() => {
+      lastWorn = setInterval(() => {
         setTimer(timerState => timerState + 1)
       }, days
       )}

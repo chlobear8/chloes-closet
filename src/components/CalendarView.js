@@ -1,16 +1,23 @@
 import Calendar from 'react-calendar';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import 'react-calendar/dist/Calendar.css';
-
-
-const calendarData = [{ date: new Date(`{dateChosen}`), image: (`{image}`)}];
+import Avatar from './Avatar';
 
 function DateBlock({ date, image }) {
+  const calendarData = [{ date: date, image: newAvatar.images[0] }];
+  const [newAvatar, setNewAvatar] = useState({ baseImage: '', images: []});
+
   return (
-    <div className ="date-block">
-      <span classname="date">{date}</span>
-      <img src={image} alt="Date" className="image" />
-    </div>
+    <React.Fragment>
+      <div className ="date-block">
+        <span classname="date">{date}</span>
+        <img src={image} alt="Date" className="image" />
+      </div>
+      <Avatar
+        articles={[]}
+        lastWorn= ""
+        newAvatar={newAvatar} />
+    </React.Fragment>
   );
 }
 

@@ -87,9 +87,7 @@ function ClosetControl () {
     currentlyVisibleState = <CalendarView onCalendarView = {handleCalendarView} />;
     buttonText = "Return to Closet";
   } else {
-    currentlyVisibleState = <ArticleList 
-    onArticleSelection = {handleChangingSelectedArticle} 
-    articles = {mainClosetList}
+    currentlyVisibleState = <CalendarView
     onCalendarClick={handleCalendarClick} />;
     buttonText = "Add Clothing";
   }

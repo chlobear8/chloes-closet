@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-function BaseImageForm() {
+function BaseImageForm(props) {
+  const [state, setState] = useState({image: null});
+
   const handleImageChange = (e) => {
     setState((prevState) => ({
       ...prevState,
