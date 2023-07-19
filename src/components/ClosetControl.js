@@ -5,6 +5,7 @@ import ArticleDetail from "./ArticleDetail";
 import CalendarView from "./CalendarView";
 import { db, auth } from './../firebase.js';
 import { collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { formatDistanceToNow } from "date-fns";
 
 function ClosetControl () {
 
@@ -18,9 +19,12 @@ function ClosetControl () {
   useEffect(() => {
     const unSubscribe = onSnapshot(
       collection(db, "articles"),
-      (collectionSnapshot) => {
+      (querySnapshot) => {
         const articles = [];
-        collectionSnapshot.forEach((doc) => {
+        querySnapshot.forEach((doc) => {
+          const addedToCloset = doc.get('addedToCloset', 
+          {serverTimestamps: "Added"}).toDate();
+          const jsDate = new Date(addedToCloset);
           articles.push({
             articleName: doc.data().articleName,
             image: doc.data().image,
@@ -28,6 +32,8 @@ function ClosetControl () {
             occasion: doc.data().occasion,
             season: doc.data().season,
             lastWorn: doc.data().lastWorn,
+            addedToCloset: jsDate,
+            whenAdded: formatDistanceToNow(jsDate),
             id: doc.id
           });
         });
