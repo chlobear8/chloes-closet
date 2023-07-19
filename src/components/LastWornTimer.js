@@ -15,10 +15,12 @@ function LastWornTimer() {
       }, days
       )}
   
-      return () => clearLastWorn(lastWorn);
+      return () => {
+        clearInterval(lastWorn);
+      };
     }, [isActive]);
 
     return [isActive, timer, setIsActive];
   }
   
-  export default LastWornTimer();
+  export default LastWornTimer;

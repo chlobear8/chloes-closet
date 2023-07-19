@@ -4,7 +4,6 @@ import 'react-calendar/dist/Calendar.css';
 import Avatar from './Avatar';
 
 function DateBlock({ date, image }) {
-  const calendarData = [{ date: date, image: newAvatar.images[0] }];
   const [newAvatar, setNewAvatar] = useState({ baseImage: '', images: []});
 
   return (
@@ -16,13 +15,16 @@ function DateBlock({ date, image }) {
       <Avatar
         articles={[]}
         lastWorn= ""
-        newAvatar={newAvatar} />
+        setNewAvatar={newAvatar} />
     </React.Fragment>
   );
 }
 
 function CalendarView() {
   const [date, setDate] = useState(new Date());
+  const [newAvatar, setNewAvatar] = useState({ baseImage: '', images: []});
+  const calendarData = [{ date: date, image: newAvatar.images[0] }];
+  
   return (
     <div className='calendar'>
       <div className = 'calendar-container'>
