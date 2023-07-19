@@ -15,6 +15,7 @@ function ArticleList(props) {
       occasion= {article.occasion}
       season= {article.season}
       lastWorn= {article.lastWorn}
+      whenAdded= {article.whenAdded}
       id= {article.id}
       key= {article.id} />
       )}
@@ -25,6 +26,6 @@ function ArticleList(props) {
 ArticleList.propTypes = {
   articles: PropTypes.array,
   onArticleSelection: PropTypes.func
-}
+};
 
 export default ArticleList;
