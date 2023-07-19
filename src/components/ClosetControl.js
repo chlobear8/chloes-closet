@@ -6,6 +6,7 @@ import CalendarView from "./CalendarView";
 import { db, auth } from './../firebase.js';
 import { collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, query, orderBy } from "firebase/firestore";
 import { formatDistanceToNow } from "date-fns";
+import ArticleList from "./ArticleList";
 
 function ClosetControl () {
 
@@ -132,21 +133,28 @@ function ClosetControl () {
         onEditArticle= {handleEditingArticleInList} />
         buttonText= "Return to Closet";
     } else if (selectedArticle != null) {
-      currentlyVisibleState = <ArticleDetail
+      currentlyVisibleState = 
+      <ArticleDetail
         article={selectedArticle}
         onClickingDelete={handleDeletingArticle}
         onClickingEdit={handleEditClick} />
         buttonText= "Return to Closet";
     } else if (formVisibleOnPage) {
-      currentlyVisibleState = <NewArticleForm onNewArticleCreation = {handleAddingNewArticleToList} />;
-      buttonText = "Return to Closet";
+      currentlyVisibleState = 
+      <NewArticleForm 
+        onNewArticleCreation = {handleAddingNewArticleToList} />;
+        buttonText = "Return to Closet";
     } else if (calendarView) {
-      currentlyVisibleState = <CalendarView onCalendarView = {handleCalendarView} />;
-      buttonText = "Return to Closet";
+      currentlyVisibleState = 
+      <CalendarView 
+        onCalendarView = {handleCalendarView} />;
+        buttonText = "Return to Closet";
     } else {
-      currentlyVisibleState = <CalendarView
-      onCalendarClick={handleCalendarClick} />;
-      buttonText = "Add Clothing";
+      currentlyVisibleState = 
+      <ArticleList
+        onArticleSelection={handleChangingSelectedArticle}
+        closetList={mainClosetList} />;
+        buttonText = "Add Clothing";
     }
 
     return (
