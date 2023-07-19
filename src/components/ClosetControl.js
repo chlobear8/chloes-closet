@@ -3,7 +3,7 @@ import NewArticleForm from "./NewArticleForm";
 import EditArticleForm from "./EditArticleForm";
 import ArticleDetail from "./ArticleDetail";
 import CalendarView from "./CalendarView";
-import { db } from './../firebase.js';
+import { db, auth } from './../firebase.js';
 import { collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc } from "firebase/firestore";
 
 function ClosetControl () {
