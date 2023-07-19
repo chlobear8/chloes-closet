@@ -1,6 +1,10 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
-const imageLayering = ({ images, baseImage }) => {
+function ImageLayer(props) {
+
+  const { images, baseImage } = props;
+  
   return (
     <div style = {{ position: 'relative' }}>
       <img src = {baseImage} alt = "Avatar" />
@@ -21,4 +25,5 @@ const imageLayering = ({ images, baseImage }) => {
   );
 };
 
-export default imageLayering;
+
+export default ImageLayer;
