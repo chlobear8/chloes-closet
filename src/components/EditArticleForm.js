@@ -19,6 +19,6 @@ function EditArticleForm(props) {
 EditArticleForm.propTypes = {
   article: PropTypes.object,
   onEditArticle: PropTypes.func
-}
+};
 
 export default EditArticleForm;

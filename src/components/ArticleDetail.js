@@ -23,6 +23,6 @@ ArticleDetail.propTypes = {
   article: PropTypes.object,
   onClickingEdit: PropTypes.func,
   onClickingDelete: PropTypes.func
-}
+};
 
 export default ArticleDetail;

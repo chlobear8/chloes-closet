@@ -19,6 +19,6 @@ Closet.propTypes = {
   image: PropTypes.instanceOf(File),
   id: PropTypes.string,
   whenArticleClicked: PropTypes.func
-}
+};
 
 export default Closet;

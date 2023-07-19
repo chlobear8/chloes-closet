@@ -4,7 +4,7 @@ import EditArticleForm from "./EditArticleForm";
 import ArticleDetail from "./ArticleDetail";
 import CalendarView from "./CalendarView";
 import { db, auth } from './../firebase.js';
-import { collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, query, orderBy } from "firebase/firestore";
 import { formatDistanceToNow } from "date-fns";
 
 function ClosetControl () {
@@ -31,10 +31,14 @@ function ClosetControl () {
         clearInterval(whenAddedTimer);
       }
   }, [mainClosetList])
-  
+
   useEffect(() => {
-    const unSubscribe = onSnapshot(
+    const queryByTimeStamp = query(
       collection(db, "articles"),
+      orderBy('whenAdded')
+    );
+    const unSubscribe = onSnapshot(
+      queryByTimeStamp,
       (querySnapshot) => {
         const articles = [];
         querySnapshot.forEach((doc) => {

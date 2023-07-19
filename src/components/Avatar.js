@@ -27,6 +27,6 @@ Avatar.propTypes = {
   articles: PropTypes.array,
   lastWorn: PropTypes.string,
   newAvatar: PropTypes.object
-}
+};
 
 export default Avatar;
