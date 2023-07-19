@@ -86,41 +86,50 @@ function ClosetControl () {
     setSelectedArticle(null);
   }
 
-  let currentlyVisibleState = null;
-  let buttonText = null;
+  if (auth.currentUser == null) {
+    return (
+      <React.Fragment>
+        <h1>You must be signed in to access your closet.</h1>
+      </React.Fragment>
+    )
+  } else if (auth.currentUser != null) {
 
-  if (error) {
-    currentlyVisibleState = <p>There was an error: {error}</p>
-  } else if (editing) {
-    currentlyVisibleState =
-    <EditArticleForm  
-      article = {selectedArticle}
-      onEditArticle= {handleEditingArticleInList} />
-      buttonText= "Return to Closet";
-  } else if (selectedArticle != null) {
-    currentlyVisibleState = <ArticleDetail
-      article={selectedArticle}
-      onClickingDelete={handleDeletingArticle}
-      onClickingEdit={handleEditClick} />
-      buttonText= "Return to Closet";
-  } else if (formVisibleOnPage) {
-    currentlyVisibleState = <NewArticleForm onNewArticleCreation = {handleAddingNewArticleToList} />;
-    buttonText = "Return to Closet";
-  } else if (calendarView) {
-    currentlyVisibleState = <CalendarView onCalendarView = {handleCalendarView} />;
-    buttonText = "Return to Closet";
-  } else {
-    currentlyVisibleState = <CalendarView
-    onCalendarClick={handleCalendarClick} />;
-    buttonText = "Add Clothing";
+    let currentlyVisibleState = null;
+    let buttonText = null;
+
+    if (error) {
+      currentlyVisibleState = <p>There was an error: {error}</p>
+    } else if (editing) {
+      currentlyVisibleState =
+      <EditArticleForm  
+        article = {selectedArticle}
+        onEditArticle= {handleEditingArticleInList} />
+        buttonText= "Return to Closet";
+    } else if (selectedArticle != null) {
+      currentlyVisibleState = <ArticleDetail
+        article={selectedArticle}
+        onClickingDelete={handleDeletingArticle}
+        onClickingEdit={handleEditClick} />
+        buttonText= "Return to Closet";
+    } else if (formVisibleOnPage) {
+      currentlyVisibleState = <NewArticleForm onNewArticleCreation = {handleAddingNewArticleToList} />;
+      buttonText = "Return to Closet";
+    } else if (calendarView) {
+      currentlyVisibleState = <CalendarView onCalendarView = {handleCalendarView} />;
+      buttonText = "Return to Closet";
+    } else {
+      currentlyVisibleState = <CalendarView
+      onCalendarClick={handleCalendarClick} />;
+      buttonText = "Add Clothing";
+    }
+
+    return (
+      <React.Fragment>
+        {currentlyVisibleState}
+        {error ? null : <button onClick = {handleClick}>{buttonText}</button>}
+      </React.Fragment>
+    );
   }
-
-  return (
-    <React.Fragment>
-      {currentlyVisibleState}
-      {error ? null : <button onClick = {handleClick}>{buttonText}</button>}
-    </React.Fragment>
-  );
 }
 
 export default ClosetControl;
