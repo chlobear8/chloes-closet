@@ -17,6 +17,22 @@ function ClosetControl () {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    function updateAddedToCloset() {
+      const newMainClosetList = mainClosetList.map(article => {
+        const newWhenAdded = formatDistanceToNow(ticket.addedToCloset);
+        return {...article, whenAdded: newWhenAdded};
+      });
+      setMainClosetList(newMainClosetList);
+    }
+    const whenAddedTimer = setInterval(() =>
+      updateAddedToCloset(), Math.floor((1000 * 60 * 60 * 24))
+      );
+      return function cleanup() {
+        clearInterval(whenAddedTimer);
+      }
+  }, [mainClosetList])
+  
+  useEffect(() => {
     const unSubscribe = onSnapshot(
       collection(db, "articles"),
       (querySnapshot) => {
