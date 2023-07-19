@@ -12,13 +12,13 @@ function LastWornTimer() {
     if(isActive) {
       lastWorn = setInterval(() => {
         setTimer(timerState => timerState + 1)
-      }, days
-      )}
+      }, days);
+    }
   
       return () => {
         clearInterval(lastWorn);
       };
-    }, [isActive]);
+    }, [isActive, days]);
 
     return [isActive, timer, setIsActive];
   }

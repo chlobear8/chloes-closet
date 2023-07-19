@@ -19,7 +19,7 @@ function ClosetControl () {
   useEffect(() => {
     function updateAddedToCloset() {
       const newMainClosetList = mainClosetList.map(article => {
-        const newWhenAdded = formatDistanceToNow(ticket.addedToCloset);
+        const newWhenAdded = formatDistanceToNow(article.addedToCloset);
         return {...article, whenAdded: newWhenAdded};
       });
       setMainClosetList(newMainClosetList);
