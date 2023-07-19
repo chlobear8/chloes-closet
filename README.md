@@ -12,7 +12,8 @@
 #### Saturday 7/15
 * 12: Take pictures for DB, so I can test image layering.
 * 2:15: Download photos into a file for access.
-
+#### Monday 7/18
+* Class period 6-8:15: Working on trying to figure out Avatar and props issues.
 
 # Chloe's Closet
 
