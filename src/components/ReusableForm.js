@@ -5,7 +5,6 @@ import { getStorage, ref } from "firebase/storage";
 function ReusableForm(props) {
 
   const storage = getStorage();
-  const articlesImagesRef = ref(storage, 'articles/{articleName}.jpg');
   const [state, setState] = useState({
     articleName: "",
     image: null,
@@ -37,11 +36,28 @@ function ReusableForm(props) {
   };
 
   const handleImageChange = (e) => {
+    const file = e.target.files[0];
     setState((prevState) => ({
       ...prevState,
-      image: e.target.files[0]
+      image: file
     }));
+
+    if (state.articleName) {
+      const articlesImagesRef = ref(storage, 'articles/${state.articleName}.jpg');
+      uploadBytes(articlesImagesRef, file)
+        .then((snapshot) => {
+          snapshot.ref.getDownloadURL()
+            .then((downloadURL) => {
+              setImageUrl(downloadURL);
+            });
+        })
+        .catch((error) => {
+          console.error("Error uploading image:", error);
+        });
+    }
   };
+
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -18,6 +18,7 @@ function ClosetControl () {
   const [calendarView, setCalendarView] = useState(false);
   const [error, setError] = useState(null);
   const storage = getStorage();
+  const httpsRef = ref(storage, '')
 
   useEffect(() => {
     function updateAddedToCloset() {
