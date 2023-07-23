@@ -111,13 +111,13 @@ function ClosetControl () {
     setSelectedArticle(selection);
   }
 
-  const handleCalendarClick = () => {
-    setCalendarView(true);
-  }
+  // const handleCalendarClick = () => {
+  //   setCalendarView(true);
+  // }
 
   const handleCalendarView = (calendarPage) => {
     setEditing(false);
-    setCalendarView(false);
+    setCalendarView(true);
     setSelectedArticle(null);
   }
 

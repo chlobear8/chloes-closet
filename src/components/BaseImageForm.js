@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 function BaseImageForm(props) {
-  const [state, setState] = useState({image: null});
+  const [state, setState] = useState({baseImage: null});
 
   const handleImageChange = (e) => {
     setState((prevState) => ({
       ...prevState,
-      image: e.target.files[0]
+      baseImage: e.target.files[0]
     }));
   };
 
