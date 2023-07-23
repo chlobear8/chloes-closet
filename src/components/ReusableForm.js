@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { getStorage, ref } from "firebase/storage";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 function ReusableForm(props) {
 
   const storage = getStorage();
+
   const [state, setState] = useState({
     articleName: "",
     image: null,
@@ -12,6 +13,9 @@ function ReusableForm(props) {
     occasion: "",
     season: []
   });
+  
+  const [imageUrl, setImageUrl] = useState("");
+
   const clothingCategories = ["Tops", "Bottoms", "Shoes", "Dresses", "Bags", "Accessories", "Outerwear"];
 
   const clothingOccasions = ["Casual", "Formal", "Work"];

@@ -8,9 +8,18 @@ const storageRef = ref(storage, 'articles');
 
 function NewArticleForm(props) {
   function handleNewArticleFormSubmission(articleData) {
-    uploadBytes(storageRef, file).then((snapshot) => {
+    const { image, ...article } = articleData; 
+    uploadBytes(storageRef, image)
+    .then((snapshot) => {
       console.log('Uploaded a blob or file!');
-      props.onNewArticleCreation(articleData);
+      const newArticle = {
+        ...article,
+        imageUrl: snapshot.ref.getDownloadURL(),
+      };
+      props.onNewArticleCreation(newArticle);
+    })
+    .catch((error) => {
+      console.error("Error uploading image:", error);
     });
   }
 
@@ -18,13 +27,15 @@ function NewArticleForm(props) {
     <React.Fragment>
       <ReusableForm 
       formSubmissionHandler={handleNewArticleFormSubmission}
-      buttonText= "Add to Closet" />
+      buttonText= "Add to Closet"
+      file= {props.file} />
     </React.Fragment>
   );
 } 
 
 NewArticleForm.propTypes = {
-  onNewArticleCreation: PropTypes.func
+  onNewArticleCreation: PropTypes.func,
+  file: PropTypes.object
 };
 
 export default NewArticleForm;

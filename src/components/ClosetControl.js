@@ -52,6 +52,7 @@ function ClosetControl () {
           articles.push({
             articleName: doc.data().articleName,
             image: doc.data().image,
+            imageUrl: doc.data().imageUrl,
             category: doc.data().category,
             occasion: doc.data().occasion,
             season: doc.data().season,
