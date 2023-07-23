@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ImageLayer from './ImageLayer';
 import LastWornTimer from './LastWornTimer';
-//import BaseImageForm from './BaseImageForm';
 
 function Avatar(props) {
   const baseImage = props.baseImage;
   const images = props.articles.map(article => article.image);
   const [isActive, timer, setIsActive] = LastWornTimer();
   const [newAvatar, setNewAvatar] = useState({ baseImage: '', images: []});
-  //props.newAvatar = {baseImage, images};
 
   return (
     <React.Fragment>

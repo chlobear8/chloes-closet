@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage, uploadBytes } from "firebase/storage";
 
 function ReusableForm(props) {
 
@@ -45,26 +45,7 @@ function ReusableForm(props) {
       ...prevState,
       image: file
     }));
-
-    if (state.articleName) {
-      console.log("Doing the things here")
-      // const articlesImagesRef = ref(storage, 'articles/{articleName}.jpg');
-      // uploadBytes(articlesImagesRef, file)
-      //   .then((snapshot) => {
-      //     console.log("post upload")
-      //     snapshot.ref.getDownloadURL()
-      //       .then((downloadURL) => {
-      //         console.log("IN download url")
-      //         setImageUrl(downloadURL);
-      //       });
-      //   })
-      //   .catch((error) => {
-      //     console.error("Error uploading image:", error);
-      //   });
-    }
   };
-
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();

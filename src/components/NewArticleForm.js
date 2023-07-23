@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ReusableForm from "./ReusableForm";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 function NewArticleForm(props) {
 
