@@ -11,6 +11,7 @@ function ArticleList(props) {
       whenArticleClicked={props.onArticleSelection}
       articleName= {article.articleName}
       image={article.image}
+      imageUrl={article.imageUrl}
       category= {article.category}
       occasion= {article.occasion}
       season= {article.season}

@@ -47,17 +47,20 @@ function ReusableForm(props) {
     }));
 
     if (state.articleName) {
-      const articlesImagesRef = ref(storage, 'articles/${state.articleName}.jpg');
-      uploadBytes(articlesImagesRef, file)
-        .then((snapshot) => {
-          snapshot.ref.getDownloadURL()
-            .then((downloadURL) => {
-              setImageUrl(downloadURL);
-            });
-        })
-        .catch((error) => {
-          console.error("Error uploading image:", error);
-        });
+      console.log("Doing the things here")
+      // const articlesImagesRef = ref(storage, 'articles/{articleName}.jpg');
+      // uploadBytes(articlesImagesRef, file)
+      //   .then((snapshot) => {
+      //     console.log("post upload")
+      //     snapshot.ref.getDownloadURL()
+      //       .then((downloadURL) => {
+      //         console.log("IN download url")
+      //         setImageUrl(downloadURL);
+      //       });
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error uploading image:", error);
+      //   });
     }
   };
 

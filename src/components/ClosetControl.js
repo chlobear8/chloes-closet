@@ -7,7 +7,7 @@ import { db, auth } from './../firebase.js';
 import { collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, query, orderBy } from "firebase/firestore";
 import { formatDistanceToNow } from "date-fns";
 import ArticleList from "./ArticleList";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
 
 function ClosetControl () {
 
@@ -82,7 +82,24 @@ function ClosetControl () {
     }
   }
 
-  const handleAddingNewArticleToList = async (newArticle) => {
+  const handleAddingNewArticleToList = async (newArticle, image) => {
+    console.log("inHandleNewArticle")
+    console.log(newArticle)
+    const storage = getStorage();
+    const storageRef = ref(storage, `articles/{newArticle['articleName'].jpg}`);
+    const resp = await uploadBytes(storageRef, image);
+    //const url = await storageRef.getDownloadURL().catch((error) => { throw error });
+    newArticle['imageUrl'] = "url";
+    // console.log()
+    // uploadBytes(storageRef, image)
+    // .then((snapshot) => {
+    //   console.log('Uploaded a blob or file!');
+
+     
+    // })
+    // .catch((error) => {
+    //   console.error("Error uploading image:", error);
+    // });
     await addDoc(collection(db, "article"), newArticle);
     setFormVisibleOnPage(false);
   }
