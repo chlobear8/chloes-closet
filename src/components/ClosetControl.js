@@ -7,6 +7,7 @@ import { db, auth } from './../firebase.js';
 import { collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, query, orderBy } from "firebase/firestore";
 import { formatDistanceToNow } from "date-fns";
 import ArticleList from "./ArticleList";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 function ClosetControl () {
 
@@ -16,6 +17,7 @@ function ClosetControl () {
   const [editing, setEditing] = useState(false);
   const [calendarView, setCalendarView] = useState(false);
   const [error, setError] = useState(null);
+  const storage = getStorage();
 
   useEffect(() => {
     function updateAddedToCloset() {

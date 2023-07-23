@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { getStorage, ref } from "firebase/storage";
 
 function ReusableForm(props) {
 
+  const storage = getStorage();
+  const articlesImagesRef = ref(storage, 'articles/{articleName}.jpg');
   const [state, setState] = useState({
     articleName: "",
     image: null,

@@ -1,6 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ReusableForm from "./ReusableForm";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
+
+const storage = getStorage();
+const storageRef = ref(storage, 'articles');
 
 function NewArticleForm(props) {
   function handleNewArticleFormSubmission(articleData) {
