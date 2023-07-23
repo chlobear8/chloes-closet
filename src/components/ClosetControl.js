@@ -153,7 +153,7 @@ function ClosetControl () {
       currentlyVisibleState = 
       <ArticleList
         onArticleSelection={handleChangingSelectedArticle}
-        closetList={mainClosetList} />;
+        articles={mainClosetList} />;
         buttonText = "Add Clothing";
     }
 

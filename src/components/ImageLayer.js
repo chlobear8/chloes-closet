@@ -1,10 +1,10 @@
 import React from "react";
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 function ImageLayer(props) {
 
   const { images, baseImage } = props;
-  
+
   return (
     <div style = {{ position: 'relative' }}>
       <img src = {baseImage} alt = "Avatar" />
@@ -24,6 +24,5 @@ function ImageLayer(props) {
     </div>
   );
 };
-
 
 export default ImageLayer;

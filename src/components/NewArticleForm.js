@@ -4,7 +4,10 @@ import ReusableForm from "./ReusableForm";
 
 function NewArticleForm(props) {
   function handleNewArticleFormSubmission(articleData) {
-    props.onNewArticleCreation(articleData);
+    uploadBytes(storageRef, file).then((snapshot) => {
+      console.log('Uploaded a blob or file!');
+      props.onNewArticleCreation(articleData);
+    });
   }
 
   return(
