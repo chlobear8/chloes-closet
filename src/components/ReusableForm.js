@@ -13,7 +13,7 @@ function ReusableForm(props) {
     occasion: "",
     season: []
   });
-  
+
   const [imageUrl, setImageUrl] = useState("");
 
   const clothingCategories = ["Tops", "Bottoms", "Shoes", "Dresses", "Bags", "Accessories", "Outerwear"];
@@ -152,7 +152,8 @@ function ReusableForm(props) {
 
 ReusableForm.propTypes = {
   formSubmissionHandler: PropTypes.func,
-  buttonText: PropTypes.string
+  buttonText: PropTypes.string,
+  file: PropTypes.object
 };
 
 export default ReusableForm;
