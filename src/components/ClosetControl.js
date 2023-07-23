@@ -3,7 +3,7 @@ import NewArticleForm from "./NewArticleForm";
 import EditArticleForm from "./EditArticleForm";
 import ArticleDetail from "./ArticleDetail";
 import CalendarView from "./CalendarView";
-import { db, auth } from './../firebase.js';
+import { db, auth, storage } from './../firebase.js';
 import { collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, query, orderBy } from "firebase/firestore";
 import { formatDistanceToNow } from "date-fns";
 import ArticleList from "./ArticleList";
@@ -17,8 +17,8 @@ function ClosetControl () {
   const [editing, setEditing] = useState(false);
   const [calendarView, setCalendarView] = useState(false);
   const [error, setError] = useState(null);
-  const storage = getStorage();
-  const httpsRef = ref(storage, '')
+  //const storage = getStorage();
+  //const httpsRef = ref(storage, '')
 
   useEffect(() => {
     function updateAddedToCloset() {
@@ -82,16 +82,19 @@ function ClosetControl () {
     }
   }
 
-  const handleAddingNewArticleToList = async (newArticle, image) => {
+  const handleAddingNewArticleToList = async (articleProps) => {
+    const {newArticle, image} = articleProps;
     console.log("inHandleNewArticle")
     console.log(newArticle)
-    const storage = getStorage();
-    const storageRef = ref(storage, `articles/{newArticle['articleName'].jpg}`);
+    //const storage = getStorage();
+    const fileName = `articles/${newArticle['articleName']}.jpg`
+    console.log(fileName);
+    const storageRef = ref(storage, fileName);
+    console.log(storageRef)
     const resp = await uploadBytes(storageRef, image);
-    //const url = await storageRef.getDownloadURL().catch((error) => { throw error });
-    newArticle['imageUrl'] = "url";
-    // console.log()
-    // uploadBytes(storageRef, image)
+    const url = await getDownloadURL(storageRef, fileName).catch((error) => { throw error });
+    newArticle['imageUrl'] = url;
+    // uploadBytes(storageRef, image) 
     // .then((snapshot) => {
     //   console.log('Uploaded a blob or file!');
 
