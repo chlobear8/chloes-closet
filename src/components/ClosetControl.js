@@ -113,7 +113,7 @@ function ClosetControl () {
     const url = await getDownloadURL(storageRef, fileName).catch((error) => { throw error });
 
     newAvatar['baseImageUrl'] = url;
-    await addDoc(collection(db, "article"), newAvatar);
+    await addDoc(collection(db, "avatar"), newAvatar);
     setBaseImageFormVisible(false);
   }
 
@@ -181,7 +181,7 @@ function ClosetControl () {
     } else if (baseImageFormVisible) {
       currentlyVisibleState =
       <BaseImageForm
-        onNewBaseImageCreation = {handleAddingNewBaseImageToList} />;
+        onNewAvatarCreation = {handleAddingNewBaseImageToList} />;
         buttonText = "Submit";
     } else if (calendarView) {
       currentlyVisibleState = 
