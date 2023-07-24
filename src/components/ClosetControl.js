@@ -105,15 +105,15 @@ function ClosetControl () {
     setFormVisibleOnPage(false);
   }
 
-  const handleAddingNewBaseImageToList = async (articleProps) => {
-    const {newArticle, baseImage} = articleProps;
-    const fileName = `articles/${newArticle['articleName']}.jpg`;
+  const handleAddingNewBaseImageToList = async (avatarProps) => {
+    const {newAvatar, baseImage} = avatarProps;
+    const fileName = `avatar/${newAvatar['baseImage']}.jpg`;
     const storageRef = ref(storage, fileName);
     const resp = await uploadBytes(storageRef, baseImage);
     const url = await getDownloadURL(storageRef, fileName).catch((error) => { throw error });
 
-    newArticle['baseImageUrl'] = url;
-    await addDoc(collection(db, "article"), newArticle);
+    newAvatar['baseImageUrl'] = url;
+    await addDoc(collection(db, "article"), newAvatar);
     setBaseImageFormVisible(false);
   }
 
@@ -182,7 +182,7 @@ function ClosetControl () {
       currentlyVisibleState =
       <BaseImageForm
         onNewBaseImageCreation = {handleAddingNewBaseImageToList} />;
-        buttonText = "Return to Closet";
+        buttonText = "Submit";
     } else if (calendarView) {
       currentlyVisibleState = 
       <CalendarView 

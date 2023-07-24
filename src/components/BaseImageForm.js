@@ -5,15 +5,26 @@ function BaseImageForm(props) {
   const [state, setState] = useState({baseImage: null});
 
   const handleImageChange = (e) => {
+    const file = e.target.files[0];
     setState((prevState) => ({
       ...prevState,
-      baseImage: e.target.files[0]
+      image: file
     }));
   };
 
+  function handleNewAvatarFormSubmission(avatarData) {
+    
+    const { baseImage, ...article } = avatarData; 
+    const newAvatar = {
+      ...article,
+      baseImageUrl: "",
+    };
+    props.onNewAvatarCreation({newAvatar, baseImage});
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.formSubmissionHandler(state);
+    handleNewAvatarFormSubmission(state);
   };
 
   return (
