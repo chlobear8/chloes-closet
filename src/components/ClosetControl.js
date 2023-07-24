@@ -9,6 +9,7 @@ import { formatDistanceToNow } from "date-fns";
 import ArticleList from "./ArticleList";
 import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import BaseImageForm from "./BaseImageForm";
+import Closet from "./Closet";
 
 function ClosetControl () {
 
@@ -54,6 +55,8 @@ function ClosetControl () {
             articleName: doc.data().articleName,
             image: doc.data().image,
             imageUrl: doc.data().imageUrl,
+            baseImage: doc.data().baseImage,
+            baseImageUrl: doc.data().baseImageUrl,
             category: doc.data().category,
             occasion: doc.data().occasion,
             season: doc.data().season,
@@ -185,10 +188,15 @@ function ClosetControl () {
       <CalendarView 
         onCalendarView = {handleCalendarView} />;
         buttonText = "Return to Closet";
+    // } else if (selectedArticle == null){
+    //   currentlyVisibleState = 
+    //   <ArticleList
+    //     onArticleSelection={handleChangingSelectedArticle}
+    //     articles={mainClosetList} />;
+    //     buttonText = "Return to Closet";
     } else {
       currentlyVisibleState = 
-      <ArticleList
-        onArticleSelection={handleChangingSelectedArticle}
+      <Closet
         articles={mainClosetList} />;
         buttonText = "Add Clothing";
     }
@@ -197,6 +205,7 @@ function ClosetControl () {
       <React.Fragment>
         {currentlyVisibleState}
         {error ? null : <button onClick = {handleClick}>{buttonText}</button>}
+        {error ? null : <button onClick = {baseImageClickHandler}>Add Avatar</button>}
       </React.Fragment>
     );
   }
