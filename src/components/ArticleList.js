@@ -12,6 +12,8 @@ function ArticleList(props) {
       articleName= {article.articleName}
       image={article.image}
       imageUrl={article.imageUrl}
+      baseImage={article.baseImage}
+      baseImageUrl={article.baseImageUrl}
       category= {article.category}
       occasion= {article.occasion}
       season= {article.season}

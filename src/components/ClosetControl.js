@@ -12,8 +12,10 @@ import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
 function ClosetControl () {
 
   const [formVisibleOnPage, setFormVisibleOnPage] = useState(false);
+  const [baseImageFormVisible, setBaseImageFormVisible] = useState(false);
   const [mainClosetList, setMainClosetList] = useState([]);
   const [selectedArticle, setSelectedArticle] = useState(null);
+  const [selectedBaseImageForm, setSelectedBaseImageForm] = useState(null);
   const [editing, setEditing] = useState(false);
   const [calendarView, setCalendarView] = useState(false);
   const [error, setError] = useState(null);
@@ -79,6 +81,14 @@ function ClosetControl () {
     }
   }
 
+  const baseImageClickHandler = () => {
+    if (selectedBaseImageForm != null) {
+      setBaseImageFormVisible(false);
+    } else {
+    setBaseImageFormVisible(!baseImageFormVisible);
+    }
+  }
+
   const handleAddingNewArticleToList = async (articleProps) => {
     const {newArticle, image} = articleProps;
     const fileName = `articles/${newArticle['articleName']}.jpg`;
@@ -89,6 +99,18 @@ function ClosetControl () {
     newArticle['imageUrl'] = url;
     await addDoc(collection(db, "article"), newArticle);
     setFormVisibleOnPage(false);
+  }
+
+  const handleAddingNewBaseImageToList = async (articleProps) => {
+    const {newArticle, baseImage} = articleProps;
+    const fileName = `articles/${newArticle['articleName']}.jpg`;
+    const storageRef = ref(storage, fileName);
+    const resp = await uploadBytes(storageRef, baseImage);
+    const url = await getDownloadURL(storageRef, fileName).catch((error) => { throw error });
+
+    newArticle['baseImageUrl'] = url;
+    await addDoc(collection(db, "article"), newArticle);
+    setBaseImageFormVisible(false);
   }
 
   const handleDeletingArticle = async (id) => {
