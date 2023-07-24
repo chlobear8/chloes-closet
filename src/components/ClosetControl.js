@@ -8,6 +8,7 @@ import { collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, query, order
 import { formatDistanceToNow } from "date-fns";
 import ArticleList from "./ArticleList";
 import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
+import BaseImageForm from "./BaseImageForm";
 
 function ClosetControl () {
 
@@ -173,6 +174,11 @@ function ClosetControl () {
       currentlyVisibleState = 
       <NewArticleForm 
         onNewArticleCreation = {handleAddingNewArticleToList} />;
+        buttonText = "Return to Closet";
+    } else if (baseImageFormVisible) {
+      currentlyVisibleState =
+      <BaseImageForm
+        onNewBaseImageCreation = {handleAddingNewBaseImageToList} />;
         buttonText = "Return to Closet";
     } else if (calendarView) {
       currentlyVisibleState = 
