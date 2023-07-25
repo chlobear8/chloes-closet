@@ -80,18 +80,21 @@ function ClosetControl () {
       setFormVisibleOnPage(false);
       setSelectedArticle(null);
       setEditing(false);
+    } else if (selectedBaseImageForm != null) {
+      setBaseImageFormVisible(false); 
     } else {
+      setBaseImageFormVisible(!baseImageFormVisible);
       setFormVisibleOnPage(!formVisibleOnPage);
     }
   }
 
-  const baseImageClickHandler = () => {
-    if (selectedBaseImageForm != null) {
-      setBaseImageFormVisible(false);
-    } else {
-    setBaseImageFormVisible(!baseImageFormVisible);
-    }
-  }
+  // const baseImageClickHandler = () => {
+  //   if (selectedBaseImageForm != null) {
+  //     setBaseImageFormVisible(false);
+  //   } else {
+  //   setBaseImageFormVisible(!baseImageFormVisible);
+  //   }
+  // }
 
   const handleAddingNewArticleToList = async (articleProps) => {
     const {newArticle, image} = articleProps;
@@ -205,7 +208,7 @@ function ClosetControl () {
       <React.Fragment>
         {currentlyVisibleState}
         {error ? null : <button onClick = {handleClick}>{buttonText}</button>}
-        {error ? null : <button onClick = {baseImageClickHandler}>Add Avatar</button>}
+        {/* {error ? null : <button onClick = {baseImageClickHandler}>Add Avatar</button>} */}
       </React.Fragment>
     );
   }
