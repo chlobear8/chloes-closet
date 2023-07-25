@@ -75,26 +75,34 @@ function ClosetControl () {
     return () => unSubscribe();
   }, []);
 
+  const hasBaseImageInCloset = (articles) => {
+    const hasBaseImage = articles.some((article) => {
+      console.log("Article ID:", article.id, "Base Image", article.baseImage);
+     return article.baseImage != null;
+  });
+    console.log("Has Base Image", hasBaseImage);
+    return hasBaseImage;
+}
+
   const handleClick = () => {
     if (selectedArticle != null) {
       setFormVisibleOnPage(false);
       setSelectedArticle(null);
       setEditing(false);
-    } else if (selectedBaseImageForm != null) {
-      setBaseImageFormVisible(false); 
     } else {
-      setBaseImageFormVisible(!baseImageFormVisible);
+      const hasBaseImage = hasBaseImageInCloset(mainClosetList);
+      setBaseImageFormVisible(!hasBaseImage);
       setFormVisibleOnPage(!formVisibleOnPage);
     }
   }
 
-  // const baseImageClickHandler = () => {
-  //   if (selectedBaseImageForm != null) {
-  //     setBaseImageFormVisible(false);
-  //   } else {
-  //   setBaseImageFormVisible(!baseImageFormVisible);
-  //   }
-  // }
+  const baseImageClickHandler = () => {
+    if (selectedBaseImageForm != null) {
+      setBaseImageFormVisible(false);
+    } else {
+    setBaseImageFormVisible(!baseImageFormVisible);
+    }
+  }
 
   const handleAddingNewArticleToList = async (articleProps) => {
     const {newArticle, image} = articleProps;
@@ -160,6 +168,8 @@ function ClosetControl () {
 
     let currentlyVisibleState = null;
     let buttonText = null;
+    const hasBaseImage = hasBaseImageInCloset(mainClosetList);
+    console.log("hasBaseImage", hasBaseImage);
 
     if (error) {
       currentlyVisibleState = <p>There was an error: {error}</p>
@@ -209,6 +219,9 @@ function ClosetControl () {
         {currentlyVisibleState}
         {error ? null : <button onClick = {handleClick}>{buttonText}</button>}
         {/* {error ? null : <button onClick = {baseImageClickHandler}>Add Avatar</button>} */}
+        {!hasBaseImage && !baseImageFormVisible && !selectedArticle && (
+          <button onClick = {baseImageClickHandler}> Add Avatar</button>
+        )}
       </React.Fragment>
     );
   }

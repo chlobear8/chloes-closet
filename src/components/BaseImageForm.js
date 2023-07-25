@@ -19,12 +19,10 @@ function BaseImageForm(props) {
       ...article,
       baseImageUrl: "",
     };
-    console.log("taking in image");
     props.onNewAvatarCreation({newAvatar, baseImage});
   }
 
   const handleSubmit = (e) => {
-    console.log("handleSubmit");
     e.preventDefault();
     handleNewAvatarFormSubmission(state);
   };
