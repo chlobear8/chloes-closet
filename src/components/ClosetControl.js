@@ -18,6 +18,7 @@ function ClosetControl () {
   const [mainClosetList, setMainClosetList] = useState([]);
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [selectedBaseImageForm, setSelectedBaseImageForm] = useState(null);
+  const [createImageLayer, setCreateImageLayer] = useState(false);
   const [editing, setEditing] = useState(false);
   const [calendarView, setCalendarView] = useState(false);
   const [error, setError] = useState(null);
@@ -78,7 +79,7 @@ function ClosetControl () {
   const hasBaseImageInCloset = (articles) => {
     const hasBaseImage = articles.some((article) => {
       console.log("Article ID:", article.id, "Base Image", article.baseImage);
-     return article.baseImage != null;
+      return article.baseImage != null;
   });
     console.log("Has Base Image", hasBaseImage);
     return hasBaseImage;
@@ -89,6 +90,9 @@ function ClosetControl () {
       setFormVisibleOnPage(false);
       setSelectedArticle(null);
       setEditing(false);
+      createImageLayer(false);
+    } else if (hasBaseImageInCloset != false){
+      setCreateImageLayer()
     } else {
       const hasBaseImage = hasBaseImageInCloset(mainClosetList);
       setBaseImageFormVisible(!hasBaseImage);
