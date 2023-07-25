@@ -10,6 +10,7 @@ import ArticleList from "./ArticleList";
 import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import BaseImageForm from "./BaseImageForm";
 import Closet from "./Closet";
+import ImageLayer from "./ImageLayer";
 
 function ClosetControl () {
 
@@ -22,6 +23,7 @@ function ClosetControl () {
   const [editing, setEditing] = useState(false);
   const [calendarView, setCalendarView] = useState(false);
   const [error, setError] = useState(null);
+  const [baseImageUrl, setBaseImageUrl] = useState(`{baseImageUrl}`);
 
   useEffect(() => {
     function updateAddedToCloset() {
@@ -38,6 +40,13 @@ function ClosetControl () {
         clearInterval(whenAddedTimer);
       }
   }, [mainClosetList])
+
+  useEffect(() => {
+    const fetchBaseImageUrl = async () => {
+      setBaseImageUrl(`{baseImageUrl}`);
+    };
+    fetchBaseImageUrl();
+  }, []);
 
   useEffect(() => {
     const queryByTimeStamp = query(
@@ -91,8 +100,8 @@ function ClosetControl () {
       setSelectedArticle(null);
       setEditing(false);
       createImageLayer(false);
-    } else if (hasBaseImageInCloset != false){
-      setCreateImageLayer()
+    } else if (hasBaseImageInCloset(mainClosetList) != false) {
+      setCreateImageLayer(!createImageLayer);
     } else {
       const hasBaseImage = hasBaseImageInCloset(mainClosetList);
       setBaseImageFormVisible(!hasBaseImage);
@@ -226,6 +235,8 @@ function ClosetControl () {
         {!hasBaseImage && !baseImageFormVisible && !selectedArticle && (
           <button onClick = {baseImageClickHandler}> Add Avatar</button>
         )}
+        {createImageLayer && <ImageLayer images = {mainClosetList} baseImage = {baseImageUrl} />}
+        <button onClick = {() => setCreateImageLayer(!createImageLayer)}>Create Outfit</button>
       </React.Fragment>
     );
   }
