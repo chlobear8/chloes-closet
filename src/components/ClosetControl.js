@@ -236,8 +236,8 @@ function ClosetControl () {
     } else if (selectedArticle != null) {
       currentlyVisibleState = 
       <ArticleDetail
-        article = {handleChangingSelectedArticle}  
-        article={selectedArticle}
+        //article = {handleChangingSelectedArticle}  
+        article = {selectedArticle}
         onClickingDelete={handleDeletingArticle}
         onClickingEdit={handleEditClick} />
         buttonText= "Return to Closet";
@@ -265,7 +265,8 @@ function ClosetControl () {
     } else {
       currentlyVisibleState = 
       <Closet
-        articles={mainClosetList} />;
+        articles={mainClosetList} 
+        whenArticleClicked={handleChangingSelectedArticle}/>;
         buttonText = "Add Clothing";
     }
 
