@@ -24,6 +24,7 @@ function ClosetControl () {
   const [calendarView, setCalendarView] = useState(false);
   const [error, setError] = useState(null);
   const [baseImageUrl, setBaseImageUrl] = useState(`{baseImageUrl}`);
+  
 
   useEffect(() => {
     function updateAddedToCloset() {
@@ -42,32 +43,6 @@ function ClosetControl () {
   }, [mainClosetList])
 
   useEffect(() => {
-    const fetchBaseImageUrl = async () => {
-      try {
-        const avatarDocRef = doc(db, "avatar", baseImageUrl.id);
-        const avatarDocSnap = await getDoc(avatarDocRef);
-
-        if (avatarDocSnap.exists()) {
-          const fetchedBaseImageUrl = avatarDocSnap.get("baseImageUrl");
-          if (fetchedBaseImageUrl && fetchBaseImageUrl.trim() !== "") {
-          setBaseImageUrl(fetchedBaseImageUrl);
-          } else {
-            console.log("Base Image URL is empty or undefined");
-          setBaseImageUrl("");
-          }
-        } else {
-          console.log("Avatar document does not exist");
-        setBaseImageUrl("");
-        }
-      } catch (error) {
-        console.log("Error fetching {baseImageUrl}:", error);
-        setBaseImageUrl("baseImageUrl.jpg");
-      }
-    };
-    fetchBaseImageUrl();
-  }, [baseImageUrl]);
-
-  useEffect(() => {
     const queryByTimeStamp = query(
       collection(db, "articles"),
       orderBy('whenAdded')
@@ -84,8 +59,6 @@ function ClosetControl () {
             articleName: doc.data().articleName,
             image: doc.data().image,
             imageUrl: doc.data().imageUrl,
-            baseImage: doc.data().baseImage,
-            baseImageUrl: doc.data().baseImageUrl,
             category: doc.data().category,
             occasion: doc.data().occasion,
             season: doc.data().season,
