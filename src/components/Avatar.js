@@ -13,53 +13,53 @@ function Avatar(props) {
   const [newAvatar, setNewAvatar] = useState({ baseImage: '', images: []});
   const [baseImageUrl, setBaseImageUrl] = useState(`{baseImageUrl}`);
 
-  useEffect(() => {
-    const avatarCollectionRef = collection(db, "avatar");
+  // useEffect(() => {
+  //   const avatarCollectionRef = collection(db, "avatar");
     
-    const unSubscribe = onSnapshot(avatarCollectionRef, (querySnapshot) => {
-      const avatarData = [];
-        querySnapshot.forEach((doc) => {
-          const data = doc.data();
-          avatarData.push({
-            baseImage: data.baseImage,
-            baseImageUrl: data.baseImageUrl,
-            id: doc.id
-          });
-        });
-        setMainClosetList(avatarData);
-      },
-      (error) => {
-        setError(error.message);
-      }
-    );
-    return () => unSubscribe();
-  }, []);
+  //   const unSubscribe = onSnapshot(avatarCollectionRef, (querySnapshot) => {
+  //     const avatarData = [];
+  //       querySnapshot.forEach((doc) => {
+  //         const data = doc.data();
+  //         avatarData.push({
+  //           baseImage: data.baseImage,
+  //           baseImageUrl: data.baseImageUrl,
+  //           id: doc.id
+  //         });
+  //       });
+  //       setMainClosetList(avatarData);
+  //     },
+  //     (error) => {
+  //       setError(error.message);
+  //     }
+  //   );
+  //   return () => unSubscribe();
+  // }, []);
 
-  useEffect(() => {
-    const fetchBaseImageUrl = async () => {
-      try {
-        const avatarDocRef = doc(db, "avatar", baseImageUrl.id);
-        const avatarDocSnap = await getDoc(avatarDocRef);
+  // useEffect(() => {
+  //   const fetchBaseImageUrl = async () => {
+  //     try {
+  //       const avatarDocRef = doc(db, "avatar", baseImageUrl.id);
+  //       const avatarDocSnap = await getDoc(avatarDocRef);
 
-        if (avatarDocSnap.exists()) {
-          const fetchedBaseImageUrl = avatarDocSnap.get("baseImageUrl");
-          if (fetchedBaseImageUrl && fetchBaseImageUrl.trim() !== "") {
-          setBaseImageUrl(fetchedBaseImageUrl);
-          } else {
-            console.log("Base Image URL is empty or undefined");
-          setBaseImageUrl("");
-          }
-        } else {
-          console.log("Avatar document does not exist");
-        setBaseImageUrl("");
-        }
-      } catch (error) {
-        console.log("Error fetching {baseImageUrl}:", error);
-        setBaseImageUrl("baseImageUrl.jpg");
-      }
-    };
-    fetchBaseImageUrl();
-  }, [baseImageUrl]);
+  //       if (avatarDocSnap.exists()) {
+  //         const fetchedBaseImageUrl = avatarDocSnap.get("baseImageUrl");
+  //         if (fetchedBaseImageUrl && fetchBaseImageUrl.trim() !== "") {
+  //         setBaseImageUrl(fetchedBaseImageUrl);
+  //         } else {
+  //           console.log("Base Image URL is empty or undefined");
+  //         setBaseImageUrl("");
+  //         }
+  //       } else {
+  //         console.log("Avatar document does not exist");
+  //       setBaseImageUrl("");
+  //       }
+  //     } catch (error) {
+  //       console.log("Error fetching {baseImageUrl}:", error);
+  //       setBaseImageUrl("baseImageUrl.jpg");
+  //     }
+  //   };
+  //   fetchBaseImageUrl();
+  // }, [baseImageUrl]);
 
   return (
     <React.Fragment>

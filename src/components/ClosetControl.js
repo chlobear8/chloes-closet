@@ -77,6 +77,54 @@ function ClosetControl () {
     return () => unSubscribe();
   }, []);
 
+  useEffect(() => {
+    const avatarCollectionRef = collection(db, "avatar");
+    
+    const unSubscribe = onSnapshot(avatarCollectionRef, (querySnapshot) => {
+      const avatarData = [];
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          avatarData.push({
+            baseImage: data.baseImage,
+            baseImageUrl: data.baseImageUrl,
+            id: doc.id
+          });
+        });
+        setMainClosetList(avatarData);
+      },
+      (error) => {
+        setError(error.message);
+      }
+    );
+    return () => unSubscribe();
+  }, []);
+
+  useEffect(() => {
+    const fetchBaseImageUrl = async () => {
+      try {
+        const avatarDocRef = doc(db, "avatar", baseImageUrl.id);
+        const avatarDocSnap = await getDoc(avatarDocRef);
+
+        if (avatarDocSnap.exists()) {
+          const fetchedBaseImageUrl = avatarDocSnap.get("baseImageUrl");
+          if (fetchedBaseImageUrl && fetchBaseImageUrl.trim() !== "") {
+          setBaseImageUrl(fetchedBaseImageUrl);
+          } else {
+            console.log("Base Image URL is empty or undefined");
+          setBaseImageUrl("");
+          }
+        } else {
+          console.log("Avatar document does not exist");
+        setBaseImageUrl("");
+        }
+      } catch (error) {
+        console.log("Error fetching {baseImageUrl}:", error);
+        setBaseImageUrl("baseImageUrl.jpg");
+      }
+    };
+    fetchBaseImageUrl();
+  }, [baseImageUrl]);
+
   const hasBaseImageInCloset = (articles) => {
     //const hasBaseImage = articles.some((article) => {
       //console.log("Article ID:", article.id, "Base Image", article.baseImage);
@@ -181,14 +229,15 @@ function ClosetControl () {
       currentlyVisibleState = <p>There was an error: {error}</p>
     } else if (editing) {
       currentlyVisibleState =
-      <EditArticleForm  
+      <EditArticleForm
         article = {selectedArticle}
         onEditArticle= {handleEditingArticleInList} />
         buttonText= "Return to Closet";
     } else if (selectedArticle != null) {
       currentlyVisibleState = 
       <ArticleDetail
-        article={selectedArticle}
+        article = {handleChangingSelectedArticle}  
+        //article={selectedArticle}
         onClickingDelete={handleDeletingArticle}
         onClickingEdit={handleEditClick} />
         buttonText= "Return to Closet";
