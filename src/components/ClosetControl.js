@@ -4,7 +4,7 @@ import EditArticleForm from "./EditArticleForm";
 import ArticleDetail from "./ArticleDetail";
 import CalendarView from "./CalendarView";
 import { db, auth, storage } from './../firebase.js';
-import { collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, query, orderBy } from "firebase/firestore";
+import { collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, query, orderBy, getDoc } from "firebase/firestore";
 import { formatDistanceToNow } from "date-fns";
 import ArticleList from "./ArticleList";
 import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
@@ -43,10 +43,29 @@ function ClosetControl () {
 
   useEffect(() => {
     const fetchBaseImageUrl = async () => {
-      setBaseImageUrl(`{baseImageUrl}`);
+      try {
+        const avatarDocRef = doc(db, "avatar", baseImageUrl.id);
+        const avatarDocSnap = await getDoc(avatarDocRef);
+
+        if (avatarDocSnap.exists()) {
+          const fetchedBaseImageUrl = avatarDocSnap.get("baseImageUrl");
+          if (fetchedBaseImageUrl && fetchBaseImageUrl.trim() !== "") {
+          setBaseImageUrl(fetchedBaseImageUrl);
+          } else {
+            console.log("Base Image URL is empty or undefined");
+          setBaseImageUrl("");
+          }
+        } else {
+          console.log("Avatar document does not exist");
+        setBaseImageUrl("");
+        }
+      } catch (error) {
+        console.log("Error fetching {baseImageUrl}:", error);
+        setBaseImageUrl("baseImageUrl.jpg");
+      }
     };
     fetchBaseImageUrl();
-  }, []);
+  }, [baseImageUrl]);
 
   useEffect(() => {
     const queryByTimeStamp = query(
@@ -86,21 +105,22 @@ function ClosetControl () {
   }, []);
 
   const hasBaseImageInCloset = (articles) => {
-    const hasBaseImage = articles.some((article) => {
-      console.log("Article ID:", article.id, "Base Image", article.baseImage);
-      return article.baseImage != null;
-  });
-    console.log("Has Base Image", hasBaseImage);
-    return hasBaseImage;
-}
+    //const hasBaseImage = articles.some((article) => {
+      //console.log("Article ID:", article.id, "Base Image", article.baseImage);
+      //return article.baseImage != null;
+      return articles.some((article) => article.baseImage != null);
+  //});
+    //console.log("Has Base Image", hasBaseImage);
+    //return hasBaseImage;
+};
 
   const handleClick = () => {
     if (selectedArticle != null) {
       setFormVisibleOnPage(false);
       setSelectedArticle(null);
       setEditing(false);
-      createImageLayer(false);
-    } else if (hasBaseImageInCloset(mainClosetList) != false) {
+      setCreateImageLayer(false);
+    } else if (hasBaseImageInCloset(mainClosetList) !== false) {
       setCreateImageLayer(!createImageLayer);
     } else {
       const hasBaseImage = hasBaseImageInCloset(mainClosetList);
@@ -235,7 +255,16 @@ function ClosetControl () {
         {!hasBaseImage && !baseImageFormVisible && !selectedArticle && (
           <button onClick = {baseImageClickHandler}> Add Avatar</button>
         )}
-        {createImageLayer && <ImageLayer images = {mainClosetList} baseImage = {baseImageUrl} />}
+        {createImageLayer && 
+          (<ImageLayer 
+            images = {mainClosetList.map((article) => ({
+              src: article.imageUrl,
+              position: {
+                top: "50px",
+                left: "50px"
+              },
+            }))}
+            baseImage = {baseImageUrl} />)}
         <button onClick = {() => setCreateImageLayer(!createImageLayer)}>Create Outfit</button>
       </React.Fragment>
     );
