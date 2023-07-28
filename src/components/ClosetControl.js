@@ -192,10 +192,23 @@ function ClosetControl () {
   }
 
   const handleEditingArticleInList = async (articleToEdit) => {
-    await updateDoc(doc(db, "article", selectedArticle.id), articleToEdit);
-    setEditing(false);
-    setSelectedArticle(null);
-  }
+    const { image, ...otherFields } = articleToEdit;
+    try {
+      if (image) {
+        const fileName = `articles/${selectedArticle.articleName}.jpg`;
+        const storageRef = ref(storage, fileName);
+        await uploadBytes(storageRef, image);
+        const url = await getDownloadURL(storageRef);
+        otherFields.imageUrl = url;
+      }
+      console.log("value of id:", selectedArticle.id);
+      await updateDoc(doc(db, "articles", selectedArticle.id), otherFields);
+      setEditing(false);
+      setSelectedArticle(null);
+    } catch (error) {
+      console.log("Error updating article:", error);
+    }
+  };
 
   const handleChangingSelectedArticle = (id) => {
     const selection = mainClosetList.filter(article => article.id === id)[0];
@@ -266,7 +279,7 @@ function ClosetControl () {
       currentlyVisibleState = 
       <Closet
         articles={mainClosetList} 
-        whenArticleClicked={handleChangingSelectedArticle}/>;
+        onArticleSelection={handleChangingSelectedArticle}/>;
         buttonText = "Add Clothing";
     }
 

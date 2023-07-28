@@ -5,7 +5,7 @@ function Closet(props) {
   return (
     <React.Fragment>
       {props.articles.map((article) => (
-        <div key={article.id} onClick={() => props.whenArticleClicked(article.id)}>
+        <div key={article.id} onClick={() => props.onArticleSelection(article.id)}>
           <h1>{article.articleName} : {article.lastWorn}</h1>
           {article.image && <img src={article.imageUrl} alt={article.articleName} />}
           <hr />
@@ -24,7 +24,7 @@ Closet.propTypes = {
       imageUrl: PropTypes.string,
     })
   ),
-  whenArticleClicked: PropTypes.func,
+  onArticleSelection: PropTypes.func,
 };
 
 export default Closet;
