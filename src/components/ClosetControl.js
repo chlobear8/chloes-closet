@@ -237,7 +237,7 @@ function ClosetControl () {
       currentlyVisibleState = 
       <ArticleDetail
         article = {handleChangingSelectedArticle}  
-        //article={selectedArticle}
+        article={selectedArticle}
         onClickingDelete={handleDeletingArticle}
         onClickingEdit={handleEditClick} />
         buttonText= "Return to Closet";
