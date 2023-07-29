@@ -23,8 +23,8 @@ function ClosetControl () {
   const [editing, setEditing] = useState(false);
   const [calendarView, setCalendarView] = useState(false);
   const [error, setError] = useState(null);
-  const [baseImageUrl, setBaseImageUrl] = useState(`{baseImageUrl}`);
-  
+  const [baseImageUrl, setBaseImageUrl] = useState("");
+  let buttonText = "";
 
   useEffect(() => {
     function updateAddedToCloset() {
@@ -90,7 +90,7 @@ function ClosetControl () {
             id: doc.id
           });
         });
-        setMainClosetList(avatarData);
+        //setMainClosetList(avatarData);
       },
       (error) => {
         setError(error.message);
@@ -102,12 +102,11 @@ function ClosetControl () {
   useEffect(() => {
     const fetchBaseImageUrl = async () => {
       try {
-        const avatarDocRef = doc(db, "avatar", baseImageUrl.id);
+        const avatarDocRef = doc(db, "avatar", "KNye3yGqrbO2tVcSqLyd");
         const avatarDocSnap = await getDoc(avatarDocRef);
-
         if (avatarDocSnap.exists()) {
           const fetchedBaseImageUrl = avatarDocSnap.get("baseImageUrl");
-          if (fetchedBaseImageUrl && fetchBaseImageUrl.trim() !== "") {
+          if (fetchedBaseImageUrl && fetchedBaseImageUrl.trim() !== "") {
           setBaseImageUrl(fetchedBaseImageUrl);
           } else {
             console.log("Base Image URL is empty or undefined");
@@ -125,26 +124,35 @@ function ClosetControl () {
     fetchBaseImageUrl();
   }, [baseImageUrl]);
 
-  const hasBaseImageInCloset = (articles) => {
+  const hasBaseImageInCloset = (imageUrl) => {
+    return imageUrl != "";
     //const hasBaseImage = articles.some((article) => {
       //console.log("Article ID:", article.id, "Base Image", article.baseImage);
       //return article.baseImage != null;
-      return articles.some((article) => article.baseImage != null);
+      //return articles.some((article) => article.baseImage != null);
   //});
     //console.log("Has Base Image", hasBaseImage);
     //return hasBaseImage;
 };
 
   const handleClick = () => {
+    console.log(selectedArticle, buttonText, hasBaseImageInCloset(baseImageUrl))
     if (selectedArticle != null) {
       setFormVisibleOnPage(false);
       setSelectedArticle(null);
       setEditing(false);
       setCreateImageLayer(false);
-    } else if (hasBaseImageInCloset(mainClosetList) !== false) {
+    } else if(buttonText === "Add Clothing") {
+      setFormVisibleOnPage(true);
+      setSelectedArticle(null);
+      setEditing(false);
+      setCreateImageLayer(false);
+      setBaseImageFormVisible(false);
+    } else if (hasBaseImageInCloset(baseImageUrl) !== false) {
       setCreateImageLayer(!createImageLayer);
-    } else {
-      const hasBaseImage = hasBaseImageInCloset(mainClosetList);
+    } 
+    else {
+      const hasBaseImage = hasBaseImageInCloset(baseImageUrl);
       setBaseImageFormVisible(!hasBaseImage);
       setFormVisibleOnPage(!formVisibleOnPage);
     }
@@ -166,7 +174,9 @@ function ClosetControl () {
     const url = await getDownloadURL(storageRef, fileName).catch((error) => { throw error });
 
     newArticle['imageUrl'] = url;
-    await addDoc(collection(db, "article"), newArticle);
+    const docRef = await addDoc(collection(db, "article"), newArticle);
+    newArticle['id'] = docRef.id
+    setMainClosetList([...mainClosetList, newArticle])
     setFormVisibleOnPage(false);
   }
 
@@ -212,6 +222,7 @@ function ClosetControl () {
 
   const handleChangingSelectedArticle = (id) => {
     const selection = mainClosetList.filter(article => article.id === id)[0];
+    console.log(id)
     setSelectedArticle(selection);
   }
 
@@ -234,9 +245,7 @@ function ClosetControl () {
   } else if (auth.currentUser != null) {
 
     let currentlyVisibleState = null;
-    let buttonText = null;
-    const hasBaseImage = hasBaseImageInCloset(mainClosetList);
-    console.log("hasBaseImage", hasBaseImage);
+    const hasBaseImage = hasBaseImageInCloset(baseImageUrl);
 
     if (error) {
       currentlyVisibleState = <p>There was an error: {error}</p>
@@ -245,7 +254,7 @@ function ClosetControl () {
       <EditArticleForm
         article = {selectedArticle}
         onEditArticle= {handleEditingArticleInList} />
-        buttonText= "Return to Closet";
+        buttonText = "Return to Closet";
     } else if (selectedArticle != null) {
       currentlyVisibleState = 
       <ArticleDetail
@@ -253,7 +262,7 @@ function ClosetControl () {
         article = {selectedArticle}
         onClickingDelete={handleDeletingArticle}
         onClickingEdit={handleEditClick} />
-        buttonText= "Return to Closet";
+        buttonText = "Return to Closet";
     } else if (formVisibleOnPage) {
       currentlyVisibleState = 
       <NewArticleForm 
@@ -282,7 +291,7 @@ function ClosetControl () {
         onArticleSelection={handleChangingSelectedArticle}/>;
         buttonText = "Add Clothing";
     }
-
+    console.log(mainClosetList)
     return (
       <React.Fragment>
         {currentlyVisibleState}
@@ -301,7 +310,7 @@ function ClosetControl () {
               },
             }))}
             baseImage = {baseImageUrl} />)}
-        <button onClick = {() => setCreateImageLayer(!createImageLayer)}>Create Outfit</button>
+        <button onClick = {() => setCreateImageLayer(true)}>Create Outfit</button>
       </React.Fragment>
     );
   }

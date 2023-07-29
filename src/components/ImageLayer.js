@@ -39,7 +39,6 @@ function ImageLayer(props) {
   if (selectedCategory) {
     displayedImages = images.filter(image => image.category === selectedCategory);
   }
-
   return (
     <div style = {{ position: 'relative' }}>
       <div>
@@ -50,14 +49,13 @@ function ImageLayer(props) {
       </div>
 
       <img src = {baseImage} alt = "Avatar" />
-
       {displayedImages.map((image, index) => {
           return (
             <a key = {index} href = '#' onClick = {(e) => handleImageClick(e, image)}>
               <img
                 key={index}
                 src={image.src}
-                alt={`{$index}`}
+                alt={index}
                 style={{
                   position: 'absolute',
                   top: image.position.top,
