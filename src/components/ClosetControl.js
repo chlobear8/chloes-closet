@@ -6,8 +6,7 @@ import CalendarView from "./CalendarView";
 import { db, auth, storage } from './../firebase.js';
 import { collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, query, orderBy, getDoc } from "firebase/firestore";
 import { formatDistanceToNow } from "date-fns";
-import ArticleList from "./ArticleList";
-import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
+import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import BaseImageForm from "./BaseImageForm";
 import Closet from "./Closet";
 import ImageLayer from "./ImageLayer";
@@ -90,7 +89,6 @@ function ClosetControl () {
             id: doc.id
           });
         });
-        //setMainClosetList(avatarData);
       },
       (error) => {
         setError(error.message);
@@ -109,15 +107,12 @@ function ClosetControl () {
           if (fetchedBaseImageUrl && fetchedBaseImageUrl.trim() !== "") {
           setBaseImageUrl(fetchedBaseImageUrl);
           } else {
-            console.log("Base Image URL is empty or undefined");
           setBaseImageUrl("");
           }
         } else {
-          console.log("Avatar document does not exist");
         setBaseImageUrl("");
         }
       } catch (error) {
-        console.log("Error fetching {baseImageUrl}:", error);
         setBaseImageUrl("baseImageUrl.jpg");
       }
     };
@@ -126,17 +121,9 @@ function ClosetControl () {
 
   const hasBaseImageInCloset = (imageUrl) => {
     return imageUrl != "";
-    //const hasBaseImage = articles.some((article) => {
-      //console.log("Article ID:", article.id, "Base Image", article.baseImage);
-      //return article.baseImage != null;
-      //return articles.some((article) => article.baseImage != null);
-  //});
-    //console.log("Has Base Image", hasBaseImage);
-    //return hasBaseImage;
 };
 
   const handleClick = () => {
-    console.log(selectedArticle, buttonText, hasBaseImageInCloset(baseImageUrl))
     if (selectedArticle != null) {
       setFormVisibleOnPage(false);
       setSelectedArticle(null);
@@ -211,24 +198,21 @@ function ClosetControl () {
         const url = await getDownloadURL(storageRef);
         otherFields.imageUrl = url;
       }
-      console.log("value of id:", selectedArticle.id);
       await updateDoc(doc(db, "articles", selectedArticle.id), otherFields);
       setEditing(false);
       setSelectedArticle(null);
     } catch (error) {
-      console.log("Error updating article:", error);
     }
   };
 
   const handleChangingSelectedArticle = (id) => {
     const selection = mainClosetList.filter(article => article.id === id)[0];
-    console.log(id)
     setSelectedArticle(selection);
   }
 
-  // const handleCalendarClick = () => {
-  //   setCalendarView(true);
-  // }
+  const handleCalendarClick = () => {
+    setCalendarView(true);
+  }
 
   const handleCalendarView = (calendarPage) => {
     setEditing(false);
@@ -257,8 +241,7 @@ function ClosetControl () {
         buttonText = "Return to Closet";
     } else if (selectedArticle != null) {
       currentlyVisibleState = 
-      <ArticleDetail
-        //article = {handleChangingSelectedArticle}  
+      <ArticleDetail  
         article = {selectedArticle}
         onClickingDelete={handleDeletingArticle}
         onClickingEdit={handleEditClick} />
@@ -278,12 +261,6 @@ function ClosetControl () {
       <CalendarView 
         onCalendarView = {handleCalendarView} />;
         buttonText = "Return to Closet";
-    // } else if (selectedArticle == null){
-    //   currentlyVisibleState = 
-    //   <ArticleList
-    //     onArticleSelection={handleChangingSelectedArticle}
-    //     articles={mainClosetList} />;
-    //     buttonText = "Return to Closet";
     } else {
       currentlyVisibleState = 
       <Closet
@@ -296,7 +273,6 @@ function ClosetControl () {
       <React.Fragment>
         {currentlyVisibleState}
         {error ? null : <button onClick = {handleClick}>{buttonText}</button>}
-        {/* {error ? null : <button onClick = {baseImageClickHandler}>Add Avatar</button>} */}
         {!hasBaseImage && !baseImageFormVisible && !selectedArticle && (
           <button onClick = {baseImageClickHandler}> Add Avatar</button>
         )}
