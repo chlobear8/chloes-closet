@@ -7,7 +7,6 @@ function ImageLayer(props) {
   const [displayedIndex, setDisplayedIndex] = useState(0);
 
   const handleImageClick = (e, image) => {
-    console.log("Image clicked", image.src);
   };
 
   const filterImagesByCategory = (category) => {
@@ -51,15 +50,15 @@ function ImageLayer(props) {
       <img src = {baseImage} alt = "Avatar" />
       {displayedImages.map((image, index) => {
           return (
-            <a key = {index} href = '#' onClick = {(e) => handleImageClick(e, image)}>
+            <a key = {index} href = {image} onClick = {(e) => handleImageClick(e, image)}>
               <img
                 key={index}
                 src={image.src}
                 alt={index}
                 style={{
                   position: 'absolute',
-                  top: image.position.top,
-                  left: image.position.left,
+                  top: "23px",
+                  left: "0px"
                 }}
               />
               <button onClick={() => handleAddImageToLayer(image)}>Add</button>

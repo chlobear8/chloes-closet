@@ -120,7 +120,7 @@ function ClosetControl () {
   }, [baseImageUrl]);
 
   const hasBaseImageInCloset = (imageUrl) => {
-    return imageUrl != "";
+    return imageUrl !== "";
 };
 
   const handleClick = () => {
@@ -268,7 +268,6 @@ function ClosetControl () {
         onArticleSelection={handleChangingSelectedArticle}/>;
         buttonText = "Add Clothing";
     }
-    console.log(mainClosetList)
     return (
       <React.Fragment>
         {currentlyVisibleState}
