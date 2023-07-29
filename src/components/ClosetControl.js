@@ -201,7 +201,16 @@ function ClosetControl () {
       await updateDoc(doc(db, "articles", selectedArticle.id), otherFields);
       setEditing(false);
       setSelectedArticle(null);
+      setMainClosetList((prevMainClosetList) => {
+        return prevMainClosetList.map((article) => {
+          if (article.id === selectedArticle.id) {
+            return { ...article, ...otherFields };
+          }
+          return article;
+        });
+      });
     } catch (error) {
+      console.log("Error updating article:", error);
     }
   };
 
