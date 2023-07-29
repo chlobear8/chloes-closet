@@ -7,6 +7,7 @@ function ImageLayer(props) {
   const [displayedIndex, setDisplayedIndex] = useState(0);
 
   const handleImageClick = (e, image) => {
+    console.log("Clicked image ID:", image.id);
   };
 
   const filterImagesByCategory = (category) => {
@@ -48,13 +49,13 @@ function ImageLayer(props) {
       </div>
 
       <img src = {baseImage} alt = "Avatar" />
-      {displayedImages.map((image, index) => {
+      {displayedImages.map((image) => {
           return (
-            <a key = {index} href = {image} onClick = {(e) => handleImageClick(e, image)}>
+            <a key = {image.id} href = {image.src} onClick = {(e) => handleImageClick(e, image)}>
               <img
-                key={index}
+                //key={index}
                 src={image.src}
-                alt={index}
+                alt={image.id}
                 style={{
                   position: 'absolute',
                   top: "23px",
