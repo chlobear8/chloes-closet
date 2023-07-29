@@ -188,12 +188,14 @@ function ClosetControl () {
   }
 
   const handleEditClick = () => {
+    console.log("Editing article:", selectedArticle);
     setEditing(true);
   }
 
   const handleEditingArticleInList = async (articleToEdit) => {
     const { image, ...otherFields } = articleToEdit;
     try {
+      console.log("Updating article w data:", otherFields);
       if (image) {
         const fileName = `articles/${selectedArticle.articleName}.jpg`;
         const storageRef = ref(storage, fileName);
@@ -202,16 +204,23 @@ function ClosetControl () {
         otherFields.imageUrl = url;
       }
       await updateDoc(doc(db, "articles", selectedArticle.id), otherFields);
+      setMainClosetList((prevList) =>
+      prevList.map((article) =>
+        article.id === selectedArticle.id
+          ? { ...article, ...otherFields }
+            : article
+            )
+          );
       setEditing(false);
       setSelectedArticle(null);
-      setMainClosetList((prevMainClosetList) => {
-        return prevMainClosetList.map((article) => {
-          if (article.id === selectedArticle.id) {
-            return { ...article, ...otherFields };
-          }
-          return article;
-        });
-      });
+      // setMainClosetList((prevMainClosetList) => {
+      //   return prevMainClosetList.map((article) => {
+      //     if (article.id === selectedArticle.id) {
+      //       return { ...article, ...otherFields };
+      //     }
+      //     return article;
+      //   });
+      //});
     } catch (error) {
       console.log("Error updating article:", error);
     }
