@@ -182,6 +182,9 @@ function ClosetControl () {
   const handleDeletingArticle = async (id) => {
     await deleteDoc(doc(db, "article", id));
     setSelectedArticle(null);
+    setMainClosetList((prevMainClosetList) =>
+      prevMainClosetList.filter((article) => article.id !== id)
+    );
   }
 
   const handleEditClick = () => {
