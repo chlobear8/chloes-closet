@@ -23,6 +23,7 @@ function ClosetControl () {
   const [calendarView, setCalendarView] = useState(false);
   const [error, setError] = useState(null);
   const [baseImageUrl, setBaseImageUrl] = useState("");
+  const [articleImages, setArticleImages] = useState([]);
   let buttonText = "";
 
   useEffect(() => {
@@ -118,6 +119,32 @@ function ClosetControl () {
     };
     fetchBaseImageUrl();
   }, [baseImageUrl]);
+
+  useEffect(() => {
+    const fetchArticleImages = async () => {
+      try {
+        const articleCollectionRef = collection(db, "articles");
+        const unSubscribe = onSnapshot(articleCollectionRef, (querySnapshot) => {
+          const images = [];
+          querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            if (data.imageUrl) {
+              images.push({
+                id: doc.id,
+                src: data.imageUrl,
+                category: data.category
+              });
+            }
+          });
+          setArticleImages(images);
+        });
+        return () => unSubscribe();
+      } catch (error) {
+        console.error("Error fetching article images:", error);
+      }
+    };
+    fetchArticleImages();
+  }, []);
 
   const hasBaseImageInCloset = (imageUrl) => {
     return imageUrl !== "";
