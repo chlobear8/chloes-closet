@@ -3,15 +3,18 @@ import ReusableForm from "./ReusableForm";
 import PropTypes from "prop-types";
 
 function EditArticleForm(props) {
+  const { article, onEditArticle } = props;
+
   function handleEditingArticleInList(articleData) {
-      props.onEditArticle(articleData);
+      onEditArticle(articleData);
     }
   
     return(
       <React.Fragment>
         <ReusableForm 
         formSubmissionHandler={handleEditingArticleInList}
-        buttonText= "Save Edit to Closet" />
+        buttonText= "Save Edit to Closet" 
+        articleData = {article} />
       </React.Fragment>
     );
   } 

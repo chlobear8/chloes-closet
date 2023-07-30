@@ -256,7 +256,6 @@ function ClosetControl () {
       <EditArticleForm
         article = {selectedArticle}
         onEditArticle= {handleEditingArticleInList} />
-        buttonText = "Return to Closet";
     } else if (selectedArticle != null) {
       currentlyVisibleState = 
       <ArticleDetail  
