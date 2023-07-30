@@ -7,7 +7,7 @@ function Closet(props) {
       {props.articles.map((article) => (
         <div key={article.id} onClick={() => props.onArticleSelection(article.id)}>
           <h1>{article.articleName} : {article.lastWorn}</h1>
-          {<img src={article.imageUrl} alt={article.articleName} width="50" height="50"/>}
+          {<img src={article.imageUrl} alt={article.articleName} width="150" height="150"/>}
           <hr />
         </div>
       ))}
