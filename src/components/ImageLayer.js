@@ -37,33 +37,36 @@ function ImageLayer(props) {
 
   let displayedImages = images;
   if (selectedCategory) {
-    displayedImages = images.filter(image => image.category === selectedCategory);
+    displayedImages = images.filter(
+      (image) => image.category === selectedCategory);
   }
+
   return (
     <div style = {{ position: 'relative' }}>
       <div>
         <button onClick={handleScrollLeft}>&lt;</button>
         <button onClick={handleScrollRight}>&gt;</button>
         <button onClick = {() => filterImagesByCategory(null)}>All</button>
-        {selectedCategory && <button onClick = {clearCategoryFilter}>Clear Filter</button>}
+        {selectedCategory && (<button onClick = {clearCategoryFilter}>Clear Filter</button>)}
       </div>
 
       <img src = {baseImage} alt = "Avatar" />
-      {displayedImages.map((image) => {
+      {displayedImages.map((image, index) => {
+        const shouldDisplay = index === displayedIndex;
+
           return (
-            <a key = {image.id} href = {image.src} onClick = {(e) => handleImageClick(e, image)}>
-              <img
-                //key={index}
-                src={image.src}
-                alt={image.id}
-                style={{
-                  position: 'absolute',
-                  top: "20px",
-                  left: "10px"
-                }}
-              />
+            <div
+              key = {image.id}
+              style={{
+                display: shouldDisplay ? "block" : "none",
+                position: 'absolute',
+                top: "20px",
+                left: "10px"
+              }}
+            >
+              <img src = {image.src} alt = {image.id} />
               <button onClick={() => handleAddImageToLayer(image)}>Add</button>
-            </a>
+            </div>
           );
       })}
     </div>
@@ -71,5 +74,3 @@ function ImageLayer(props) {
 };
 
 export default ImageLayer;
-
-//z index
