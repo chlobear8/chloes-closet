@@ -180,12 +180,16 @@ function ClosetControl () {
   }
 
   const handleDeletingArticle = async (id) => {
-    await deleteDoc(doc(db, "article", id));
-    setSelectedArticle(null);
-    setMainClosetList((prevMainClosetList) =>
-      prevMainClosetList.filter((article) => article.id !== id)
-    );
-  }
+    try {
+      await deleteDoc(doc(db, "article", id));
+      setSelectedArticle(null);
+      setMainClosetList((prevMainClosetList) =>
+        prevMainClosetList.filter((article) => article.id !== id)
+      );
+    } catch (error) {
+      console.error("Error deleting article:", error);
+    }
+  };
 
   const handleEditClick = () => {
     console.log("Editing article:", selectedArticle);
@@ -193,34 +197,27 @@ function ClosetControl () {
   }
 
   const handleEditingArticleInList = async (articleToEdit) => {
-    const { image, ...otherFields } = articleToEdit;
+    const { id, image, ...otherFields } = articleToEdit;
     try {
       console.log("Updating article w data:", otherFields);
+      console.log("Article ID:", id);
       if (image) {
-        const fileName = `articles/${selectedArticle.articleName}.jpg`;
+        const fileName = `articles/${articleToEdit.articleName}.jpg`;
         const storageRef = ref(storage, fileName);
         await uploadBytes(storageRef, image);
         const url = await getDownloadURL(storageRef);
         otherFields.imageUrl = url;
       }
-      await updateDoc(doc(db, "articles", selectedArticle.id), otherFields);
+      await updateDoc(doc(db, "articles", id), otherFields);
       setMainClosetList((prevList) =>
       prevList.map((article) =>
-        article.id === selectedArticle.id
+        article.id === id
           ? { ...article, ...otherFields }
             : article
             )
           );
       setEditing(false);
       setSelectedArticle(null);
-      // setMainClosetList((prevMainClosetList) => {
-      //   return prevMainClosetList.map((article) => {
-      //     if (article.id === selectedArticle.id) {
-      //       return { ...article, ...otherFields };
-      //     }
-      //     return article;
-      //   });
-      //});
     } catch (error) {
       console.log("Error updating article:", error);
     }
