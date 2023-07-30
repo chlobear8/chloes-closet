@@ -298,7 +298,7 @@ function ClosetControl () {
               src: article.imageUrl,
               position: {
                 top: "50px",
-                left: "50px"
+                left: "25px"
               },
             }))}
             baseImage = {baseImageUrl} />)}

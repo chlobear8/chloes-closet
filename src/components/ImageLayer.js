@@ -58,8 +58,8 @@ function ImageLayer(props) {
                 alt={image.id}
                 style={{
                   position: 'absolute',
-                  top: "23px",
-                  left: "0px"
+                  top: "20px",
+                  left: "10px"
                 }}
               />
               <button onClick={() => handleAddImageToLayer(image)}>Add</button>
