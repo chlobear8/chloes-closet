@@ -1,5 +1,4 @@
 import React from 'react'
-import RegisterLive from '../components/auth/RegisterLive'
 import RegisterStaging from '../components/auth/RegisterStaging'
 import MainPageTemplate from './MainPageTemplate';
 
@@ -8,7 +7,7 @@ const RegisterPage = () => {
 
   return (
     <MainPageTemplate title="Registration">
-      {currentEnv == "STAGING" ? <RegisterStaging /> : <RegisterLive />}
+      {currentEnv == <RegisterStaging />}
     </MainPageTemplate>
   )
 }
