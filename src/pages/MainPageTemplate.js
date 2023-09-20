@@ -14,7 +14,9 @@ const MainPageTemplate = (props) => {
   const currentPage = getCurrentPage(currentPath);
 
   function getCurrentPage(path) {
-    if (path === '/closet') {
+    if (path === '/calendar') {
+      return 'Calendar';
+    } else if (path === '/closet') {
       return 'Closet';
     } else if (path === '/article') {
       return 'Articles';
