@@ -4,7 +4,7 @@ import { useAuth } from '../../context/authContext';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 //import { useTheme } from '@emotion/react';
-//import MainWrapper from '../templates/MainWrapper';
+import MainWrapper from '../templates/MainWrapper';
 //import { BgGraphic01 } from '../../assets/graphics';
 //import { Logo } from '../../assets/logos';
 
