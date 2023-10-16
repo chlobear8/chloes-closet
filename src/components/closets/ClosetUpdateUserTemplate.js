@@ -10,7 +10,7 @@ import { useAuth } from '../../context/authContext';
 import { useTheme } from '@emotion/react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { CategorySelectionMultipleTag } from '../ui/CategorySelectionMultipleTag';
-import { useGetCategory, useGetCloset, useGetClosetUserId, useClosetsUserId } from '../../hooks/mutations';
+import { useGetCategory, useGetCloset, useGetClosetsUserId, useClosetsUserId } from '../../hooks/mutations';
 import ClosetUpdate from '../closets/ClosetUpdate';
 import {
   Add,
@@ -823,7 +823,7 @@ const UserClosetItem = (props) => {
         {articleSelection
           ? // Select specific articles from a set when the select option is chosen
             <DialogContent>
-              <UserClosetArticleSelect
+              <UserArticleSelect
                 closet={closet}
                 setCloset={setCloset}
                 handleCloseAlert={handleCloseAlert}
@@ -1223,7 +1223,7 @@ const UserClosetsToAdd = (props) => {
                     width:'100%'
                   }}
                 >
-                  <UserClosetArticleSelect
+                  <UserArticleSelect
                     closet={[set, closet]}
                     setCloset={setCloset}
                     handleCloseAlert={() => handleExpand(set.id)}
