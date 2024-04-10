@@ -4,7 +4,7 @@ import './App.css';
 import ClosetControl from './ClosetControl';
 import SignIn from "./SignIn";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import CalendarView from './CalendarView';
+//import CalendarView from './CalendarView';
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/sign-in" element= {<SignIn />} />
         <Route path="/" element= {<ClosetControl />} />
-        <Route path="/calendar-view" element= {<CalendarView />} />
+        {/* <Route path="/calendar-view" element= {<CalendarView />} /> */}
       </Routes>
     </Router>
   );

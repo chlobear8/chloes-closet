@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-import NewArticleForm from "./NewArticleForm";
-import EditArticleForm from "./EditArticleForm";
-import ArticleDetail from "./ArticleDetail";
-import CalendarView from "./CalendarView";
 import { db, auth, storage } from './../firebase.js';
 import { collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, query, orderBy, getDoc } from "firebase/firestore";
 import { formatDistanceToNow } from "date-fns";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import BaseImageForm from "./BaseImageForm";
-import Closet from "./Closet";
 import ImageLayer from "./ImageLayer";
+import NewArticleForm from "./articles/NewArticleForm";
+import EditArticleForm from "./articles/EditArticleForm";
+import ArticleDetail from "./articles/ArticleDetail";
+import Closet from "./Closet";
 
 function ClosetControl () {
 
@@ -300,11 +299,11 @@ function ClosetControl () {
       <BaseImageForm
         onNewAvatarCreation = {handleAddingNewBaseImageToList} />;
         buttonText = "Submit";
-    } else if (calendarView) {
-      currentlyVisibleState = 
-      <CalendarView 
-        onCalendarView = {handleCalendarView} />;
-        buttonText = "Return to Closet";
+    // } else if (calendarView) {
+    //   currentlyVisibleState = 
+    //   <CalendarView 
+    //     onCalendarView = {handleCalendarView} />;
+    //     buttonText = "Return to Closet";
     } else {
       currentlyVisibleState = 
       <Closet
