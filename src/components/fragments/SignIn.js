@@ -1,5 +1,10 @@
+import { ThemeProvider } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import NavBar from '../Navbar/Header';
+import Toolbar from '@mui/material/Toolbar';
 import React, {useState} from "react";
-import { auth } from './../firebase.js';
+import { auth } from '../../firebase.js';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 function SignIn() {
@@ -43,6 +48,7 @@ function SignIn() {
   }
 
   return (
+    <ThemeProvider theme={theme}>
     <React.Fragment>
       <h1>Sign Up</h1>
       {signUpSuccess}
@@ -75,6 +81,7 @@ function SignIn() {
       <br />
       <button onClick = {doSignOut}>Sign out</button>
     </React.Fragment>
+    </ThemeProvider>
   );
 }
 
