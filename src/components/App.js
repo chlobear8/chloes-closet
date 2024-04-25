@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header';
 import './App.css';
 import ClosetControl from './ClosetControl';
-import SignIn from "./fragments/SignIn";
+import SignIn from "./auth/SignIn";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 //import CalendarView from './CalendarView';
 
